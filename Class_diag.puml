@@ -1,0 +1,100 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Project{
++ proj_name : String[]
+- elements: List<Event>
++ startProject()
++ endProject()
++ getChildren()
+- add(e : Event)
+- delete(e : Event)
+}
+
+class Task{
++ name : String[]
+- taskDuration : List<Interval>
+- startTask()
+- endTask()
++ setTaskName(name: String[])
++acceptVisitor()
+}
+
+abstract Event{
+- addEvent(t : Task)
+- deleteEvent(t : Task)
+- getChildren()
++ acceptVisitor()
++ getName()
+# totalTime(listIntervals : List<Interval>)
+# printTime()
+}
+
+class Clock{
+- timer : Timer
+- dateTime : DateTime
+- initializeClock()
++ getInstance()
+- tick()
+}
+
+class Interval{
+- initTime: DateTime
+- endTime: DateTime
+- duration: Duration /'cada golpe de reloj incremento'/
++ getInitTime()
++ getEndTime()
++ getDuration()
+}
+
+interface Visitor{
++ visitTask()
++ visitProject()
+}
+
+class JSON{
++ save()
++ visitTask()
++ visitProject()
+}
+
+class Print{
++ visitTask()
++ visitProject()
++ printElements()
+}
+
+package "java.utils"{
+interface Observer{
++ update(arg0 : Observable, arg1 : Object)
+}
+
+abstract Observable{
++ addObserver(ob : Observer)
++ deleteObserver(ob : Observer)
++ setChanged()
++ notifyObservers(arg0 : Observable, arg1: Object}
+}
+}
+
+class Client{
+void main()
+}
+
+Event <|-- Task
+Event <|-- Project
+
+Event "1" <--* "0..*" Project
+Observable <|-- Clock
+Observer <|-- Interval
+Observer "1" <--o "0..*" Observable
+Interval "0..*" <--  "1" Task
+Event <-- Client
+JSON --|> Visitor
+Visitor <-- Client
+Print --|> Visitor
+
+
+
+@enduml
