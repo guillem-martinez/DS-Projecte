@@ -33,4 +33,14 @@ public class Clock extends Observable {
     return dateTime;
   }
 
+  @Override
+  public void notifyObservers(Object arg) {
+    super.notifyObservers(arg);
+  }
+
+  private void tick(){
+    LocalDateTime time = getDateTime();
+    setChanged();
+    notifyObservers(time);
+  }
 }

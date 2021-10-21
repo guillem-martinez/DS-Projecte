@@ -3,18 +3,17 @@
 
 
 class Project{
-+ proj_name : String[]
+# proj_name : String[]
 - elements: List<Event>
 + startProject()
 + endProject()
 + getChildren()
-- add(e : Event)
++ add(e : Event)
 - delete(e : Event)
 }
 
 class Task{
-+ name : String[]
-- taskDuration : List<Interval>
+- task_duration : List<Interval>
 - startTask()
 - endTask()
 + setTaskName(name: String[])
@@ -22,6 +21,7 @@ class Task{
 }
 
 abstract Event{
+# name: String[]
 - addEvent(t : Task)
 - deleteEvent(t : Task)
 - getChildren()
