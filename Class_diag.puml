@@ -33,9 +33,11 @@ abstract Event{
 
 class Clock{
 - timer : Timer
-- dateTime : DateTime
+- dateTime : LocalDateTime
 - initializeClock()
 + getInstance()
++ getDateTime() : LocalDateTime
++ stop()
 - tick()
 }
 
