@@ -1,8 +1,10 @@
 import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Observable;
 
-public class Clock {
+
+public class Clock extends Observable {
 
   private static LocalDateTime dateTime;
   private static Timer timer;
