@@ -13,7 +13,8 @@ class Project{
 }
 
 class Task{
-- task_duration : List<Interval>
+- task_intervals : List<Interval>
+- task_duration : duration
 - startTask()
 - endTask()
 + setTaskName(name: String[])
