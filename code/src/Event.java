@@ -1,23 +1,23 @@
 public abstract class Event {
 
-  public String name;
+  protected String name;
   private Event father;
 
-  public Event(String n){
-      name = n;
+  public Event(String n, Event f){
+      this.name = n;
+      this.father = f;
   }
 
-  private void addEvent(Task t){};
-
-  private void deleteEvent(Task t){};
-
-  public Event getFather(Event e){
-
-    return father;
+  public void setName(String n){
+    this.name = n;
   }
-  public void acceptVisitor(){};
 
-  public String getName(){return name;};
+  public String getName(){
+    return name;
+  }
 
+
+  public Event getFather(Event e) {return father;}
+  public void acceptVisitor(){}
 
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,9 +8,9 @@ public class Project extends Event{
   private List<Event> sons; //
 
 
-  public Project(List<Event> list){
-
-    sons = list;
+  public Project(String name, Event father){
+    super(name, father);
+    this.sons = new ArrayList<>();
   }
 
   public void add(Event e){
@@ -17,7 +18,7 @@ public class Project extends Event{
   }
 
   public void setProj_name(String name){
-    proj_name = name;
+    this.name = name;
   }
 
   private void delete(Event e){
@@ -26,8 +27,8 @@ public class Project extends Event{
     }
   }
 
-  public void getChildren(){
-
+  public List<Event> getChildren(){
+    return sons;
   }
 
 

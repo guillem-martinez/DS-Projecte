@@ -6,4 +6,7 @@ public class Print implements Visitor {
   public void visitProject(Project p) {
 
   }
+
+  public void printElements()
+  }
 }

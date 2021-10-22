@@ -1,6 +1,6 @@
 public class JSON {
 
-  public save(){}
+  public void save(){}
 
   public void visitTask(Task t){
 
