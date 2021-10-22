@@ -4,8 +4,13 @@ import java.util.List;
 public class Project extends Event{
 
 
-  private LinkedList<Event> elements; //preguntar profe
+  private List<Event> elements; //preguntar profe
   public String proj_name;
+
+  public Project(String name, LinkedList<Event> list){
+    proj_name = name;
+    elements = list;
+  }
 
   public void add(Event e){
     elements.add(e);
@@ -15,8 +20,14 @@ public class Project extends Event{
     proj_name = name;
   }
 
-  private void delete(String name){
+  private void delete(Event e){
+    if (elements.contains(e)){
 
+    }
+  }
+
+  public void getChildren(){
+    elements.
   }
 
 

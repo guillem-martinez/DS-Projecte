@@ -6,7 +6,7 @@ public abstract class Event {
 
   private void deleteEvent(Task t){};
 
-  //private Event getChildren();
+  private Event getChildren(){};
 
   public void acceptVisitor(){};
 
