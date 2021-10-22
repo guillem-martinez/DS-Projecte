@@ -13,4 +13,12 @@ public class Interval implements Observer {
   public void update(Observable o, Object arg) {
 
   }
+
+  public LocalDateTime getInitTime(){
+    return initTime;
+  }
+
+  public LocalDateTime getEndTime(){
+    return endTime;
+  }
 }

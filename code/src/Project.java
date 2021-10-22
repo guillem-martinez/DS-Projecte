@@ -4,18 +4,29 @@ import java.util.List;
 public class Project extends Event{
 
 
-  private LinkedList<Event> elements; //preguntar profe
-  public String proj_name;
+  private List<Event> sons; //
+
+
+  public Project(List<Event> list){
+
+    sons = list;
+  }
 
   public void add(Event e){
-    elements.add(e);
+    sons.add(e);
   }
 
   public void setProj_name(String name){
     proj_name = name;
   }
 
-  private void delete(String name){
+  private void delete(Event e){
+    if (sons.contains(e)){
+          sons.remove(e);
+    }
+  }
+
+  public void getChildren(){
 
   }
 
