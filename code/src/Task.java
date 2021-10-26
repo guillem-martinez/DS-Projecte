@@ -1,14 +1,14 @@
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Task extends Event {
 
-  List<Interval> task_intervals;
-  private Duration task_duration;
+  private ArrayList<Interval> task_intervals;
 
-  public Task(String n, Event f, List<Interval> intervals) {
+  public Task(String n, Event f) {
     super(n,f);
-    task_intervals = intervals;
+    task_intervals = new ArrayList<Interval>();
   }
 
   public void setTaskName(String name){
@@ -16,12 +16,18 @@ public class Task extends Event {
   }
   
   public Duration getDuration(){
-    //recorrer els intervals i cridar a la funció que calculi l'interval
-    return task_duration;
+    return event_duration;
   }
 
   @Override
-  public Duration calculateDuration() {
-    return null;
+  public void calculateDuration() {
+    event_duration = Duration.ZERO;
+    for(int i=0; i<task_intervals.size(); i++){
+      event_duration = event_duration.plus(task_intervals.get(i).getDuration());
+    }
+
+
+
+
   }
 }

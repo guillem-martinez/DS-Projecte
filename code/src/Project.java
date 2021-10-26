@@ -11,12 +11,15 @@ public class Project extends Event{
 
   public Project(String name, Event father){
     super(name, father);
-    this.children = new ArrayList<>();
+    children = new ArrayList<Event>();
   }
 
   @Override
-  public Duration calculateDuration() {
-    return null;
+  public void calculateDuration() {
+    event_duration = Duration.ZERO;
+    for(int i=0; i<children.size(); i++){
+      event_duration = event_duration.plus(children.get(i).getDuration());
+    }
   }
 
   public void add(Event e){

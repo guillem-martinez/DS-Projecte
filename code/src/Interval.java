@@ -14,13 +14,21 @@ public class Interval implements Observer {
 
   public Interval(Task t){
     task = t;
+
+    Clock.getInstance().addObserver(this);
   }
 
 
   //The update() method it is called whenever the observable (clock) changes state.
   @Override
   public void update(Observable o, Object arg) {
-    endTime = (LocalDateTime) arg;
+
+     LocalDateTime now = (LocalDateTime) arg;
+
+    if(initTime == null){
+      initTime = now;
+    }
+    endTime = now;
     duration = Duration.between(initTime, endTime);
     task.calculateDuration();
 
@@ -36,7 +44,7 @@ public class Interval implements Observer {
 
   public void endInterval(){
     endTime = LocalDateTime.now();
-
+    duration = Duration.between(initTime,endTime);
     Clock.getInstance().deleteObserver(this);
   }
 

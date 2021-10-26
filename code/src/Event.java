@@ -1,9 +1,14 @@
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Duration;
 
-public abstract class Event {
+public abstract class Event{
 
   protected String name;
   private Event father;
+  protected LocalDateTime initTime;
+  protected LocalDateTime endTime;
+  protected Duration event_duration;
 
   public Event(String n, Event f){
       this.name = n;
@@ -20,7 +25,8 @@ public abstract class Event {
 
 
   public Event getFather(Event e) {return father;}
-  public abstract Duration calculateDuration();
+  public Duration getDuration(){return event_duration;}
+  public abstract void calculateDuration();
   public void acceptVisitor(){}
 
 }
