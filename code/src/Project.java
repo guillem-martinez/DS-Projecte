@@ -1,3 +1,4 @@
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -5,30 +6,35 @@ import java.util.List;
 public class Project extends Event{
 
 
-  private List<Event> sons; //
+  private List<Event> children; //
 
 
   public Project(String name, Event father){
     super(name, father);
-    this.sons = new ArrayList<>();
+    this.children = new ArrayList<>();
+  }
+
+  @Override
+  public Duration calculateDuration() {
+    return null;
   }
 
   public void add(Event e){
-    sons.add(e);
+    children.add(e);
   }
 
-  public void setProj_name(String name){
-    this.name = name;
+  public void setProj_name(String proj_name){
+    name = proj_name;
   }
 
   private void delete(Event e){
-    if (sons.contains(e)){
-          sons.remove(e);
+    if (children.contains(e)){
+          children.remove(e);
     }
   }
 
   public List<Event> getChildren(){
-    return sons;
+    return children;
   }
 
 

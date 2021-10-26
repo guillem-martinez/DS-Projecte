@@ -14,6 +14,13 @@ public class Clock extends Observable {
     timer = new Timer();
   }
 
+  public static Clock getInstance() {
+    if (instance == null){
+      instance = new Clock();
+    }
+    return instance;
+  }
+
   public static void initializeClock(){
     timer = new Timer();
     TimerTask repeatTask = new TimerTask() {
@@ -23,10 +30,12 @@ public class Clock extends Observable {
         System.out.println(dateTime);
       }
     };
+    timer.scheduleAtFixedRate(repeatTask,0, 2000);
   }
 
   public void stop(){
     timer.cancel();
+    instance.deleteObservers();
   }
 
   public LocalDateTime getDateTime(){
@@ -39,7 +48,7 @@ public class Clock extends Observable {
   }
 
   private void tick(){
-    LocalDateTime time = getDateTime();
+    LocalDateTime time = this.getDateTime();
     setChanged();
     notifyObservers(time);
   }

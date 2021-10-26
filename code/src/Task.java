@@ -6,11 +6,9 @@ public class Task extends Event {
   List<Interval> task_intervals;
   private Duration task_duration;
 
-  public Task(String n, List<Interval> intervals, Duration duration) {
-    super(n);
+  public Task(String n, Event f, List<Interval> intervals) {
+    super(n,f);
     task_intervals = intervals;
-    task_duration = duration;
-
   }
 
   public void setTaskName(String name){
@@ -18,6 +16,12 @@ public class Task extends Event {
   }
   
   public Duration getDuration(){
+    //recorrer els intervals i cridar a la funció que calculi l'interval
     return task_duration;
+  }
+
+  @Override
+  public Duration calculateDuration() {
+    return null;
   }
 }

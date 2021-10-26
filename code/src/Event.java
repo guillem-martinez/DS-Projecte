@@ -1,3 +1,5 @@
+import java.time.Duration;
+
 public abstract class Event {
 
   protected String name;
@@ -18,6 +20,7 @@ public abstract class Event {
 
 
   public Event getFather(Event e) {return father;}
+  public abstract Duration calculateDuration();
   public void acceptVisitor(){}
 
 }
