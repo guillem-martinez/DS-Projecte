@@ -6,9 +6,10 @@ public class Task extends Event {
 
   private ArrayList<Interval> task_intervals;
 
-  public Task(String n, Event f) {
-    super(n,f);
+  public Task(String name, Event father) {
+    super(name,father);
     task_intervals = new ArrayList<Interval>();
+    System.out.println(name+" SUCCESSFUL");
   }
 
   public void setTaskName(String name){
@@ -25,10 +26,6 @@ public class Task extends Event {
     for(int i=0; i<task_intervals.size(); i++){
       event_duration = event_duration.plus(task_intervals.get(i).getDuration());
     }
-
-
-
-
   }
 
   public void acceptVisitor(Visitor visitor){

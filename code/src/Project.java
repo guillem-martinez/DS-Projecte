@@ -6,24 +6,25 @@ import java.util.List;
 public class Project extends Event{
 
 
-  private List<Event> children; //
+  private List<Event> events; //
 
 
   public Project(String name, Event father){
     super(name, father);
-    children = new ArrayList<Event>();
+    events = new ArrayList<Event>();
+    System.out.println(name+" SUCCESSFUL");
   }
 
   @Override
   public void calculateDuration() {
     event_duration = Duration.ZERO;
-    for(int i=0; i<children.size(); i++){
-      event_duration = event_duration.plus(children.get(i).getDuration());
+    for(int i=0; i<events.size(); i++){
+      event_duration = event_duration.plus(events.get(i).getDuration());
     }
   }
 
   public void add(Event e){
-    children.add(e);
+    events.add(e);
   }
 
   public void setProj_name(String proj_name){
@@ -31,17 +32,20 @@ public class Project extends Event{
   }
 
   private void delete(Event e){
-    if (children.contains(e)){
-          children.remove(e);
+    if (events.contains(e)){
+          events.remove(e);
     }
   }
 
   public List<Event> getChildren(){
-    return children;
+    return events;
   }
 
   public void acceptVisitor(Visitor visitor){
     visitor.visitProject(this);
+    for(int i=0; i<events.size(); i++){
+      events.get(i).acceptVisitor(visitor);
+    }
   }
 
 
