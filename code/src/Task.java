@@ -30,4 +30,8 @@ public class Task extends Event {
 
 
   }
+
+  public void acceptVisitor(Visitor visitor){
+    visitor.visitTask(this);
+  }
 }

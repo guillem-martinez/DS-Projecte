@@ -40,5 +40,9 @@ public class Project extends Event{
     return children;
   }
 
+  public void acceptVisitor(Visitor visitor){
+    visitor.visitProject(this);
+  }
+
 
 }

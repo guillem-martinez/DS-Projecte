@@ -1,5 +1,4 @@
 public interface Visitor {
-
-  default void visitTask(Task t){}
-  default void visitProject(Project p){}
+   void visitTask(Task t);
+   void visitProject(Project p);
 }
