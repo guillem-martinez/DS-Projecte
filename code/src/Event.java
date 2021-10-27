@@ -11,8 +11,12 @@ public abstract class Event{
   protected Duration event_duration;
 
   public Event(String n, Event f){
-      this.name = n;
-      this.father = f;
+      name = n;
+      father = f;
+      event_duration = Duration.ZERO;
+      if (father != null) {
+        father.addEvent(this);
+      }
   }
 
   public void setName(String n){
@@ -22,6 +26,7 @@ public abstract class Event{
   public String getName(){
     return name;
   }
+  public abstract void addEvent(Event event);
 
 
   public Event getFather(Event e) {return father;}

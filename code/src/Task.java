@@ -12,12 +12,19 @@ public class Task extends Event {
     System.out.println(name+" SUCCESSFUL");
   }
 
+  @Override
+  public void addEvent(Event event){}
+
   public void setTaskName(String name){
     this.name = name;
   }
   
   public Duration getDuration(){
     return event_duration;
+  }
+
+  public void startTask(){
+    task_intervals.add(new Interval(this));
   }
 
   @Override

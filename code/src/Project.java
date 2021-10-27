@@ -23,7 +23,7 @@ public class Project extends Event{
     }
   }
 
-  public void add(Event e){
+  public void addEvent(Event e){
     events.add(e);
   }
 
@@ -37,7 +37,7 @@ public class Project extends Event{
     }
   }
 
-  public List<Event> getChildren(){
+  public List<Event> getEvents(){
     return events;
   }
 
