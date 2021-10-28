@@ -1,7 +1,11 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Observer;
 import java.time.Duration;
 import java.util.Observable;
+
+
+//Observer that is looking to the Observable (clock) and updates for every tick in clock
 
 public class Interval implements Observer {
 
@@ -9,6 +13,7 @@ public class Interval implements Observer {
   private LocalDateTime endTime;
   private Duration duration;
   private Task task;
+  private DateTimeFormatter formatter;
 
   public Interval(Task t){
     task = t;
@@ -17,10 +22,6 @@ public class Interval implements Observer {
     }
     Clock.getInstance().addObserver(this);
   }
-  public Task getTask(){
-    return task;
-  }
-
 
   //The update() method it is called whenever the observable (clock) changes state.
   @Override
@@ -34,7 +35,6 @@ public class Interval implements Observer {
       task.setInitTime(initTime);
 
     }
-
     //System.out.println("initTime " + initTime + "\nendTime " + endTime);
     endTime = now;
     duration = Duration.between(initTime, endTime);
@@ -42,21 +42,20 @@ public class Interval implements Observer {
     //System.out.println("AFTER BETWEEN");
     task.calculateDuration();
 
-
-    Print.getInstance(null).printerInterval();
-
-
+    Print.getInstance(null).printInterval();
   }
 
-  public LocalDateTime getInitTime(){
-    return initTime;
-  }
+  //Getters
+  public LocalDateTime getInitTime() { return initTime; }
   public LocalDateTime getEndTime(){
     return endTime;
   }
   public Duration getDuration() { return duration;}
+  public Task getTask(){
+    return task;
+  }
 
-  public void endInterval(){
+  protected void endInterval(){
     endTime = LocalDateTime.now();
     duration = Duration.between(initTime,endTime);
     Clock.getInstance().deleteObserver(this);

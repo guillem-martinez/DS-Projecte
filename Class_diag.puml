@@ -79,12 +79,6 @@ interface Visitor{
 + visitInterval(i : Interval)
 }
 
-class JSON{
-+ save()
-+ visitTask(t : Task)
-+ visitProject(p : Project)
-}
-
 class Print{
 - root : Event
 - //instance : Print//
@@ -120,9 +114,8 @@ Event "1" <--* "0..*" Project
 Observable <|-- Clock
 Observer <|-- Interval
 Observer "1" <--o "0..*" Observable
-Interval "0..*" <--  "1" Task
+Interval "0..*" --*  "1" Task
 Event <-- Client
-JSON --|> Visitor
 Visitor <-- Client
 Print --|> Visitor
 

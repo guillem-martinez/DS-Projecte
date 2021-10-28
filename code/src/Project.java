@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+
+
+//Composite element of Composite pattern that extends functionality of Event
 public class Project extends Event{
 
 
@@ -15,35 +18,23 @@ public class Project extends Event{
     System.out.println(name+" SUCCESSFUL");
   }
 
+  //Getters
+  public List<Event> getEvents(){
+    return events;
+  }
+
+  //Calculates the duration of all his childs (Task/Projects with more childs or not) and Adds all the durations.
   @Override
-  public void calculateDuration() {
+  protected void calculateDuration() {
     event_duration = Duration.ZERO;
     for(int i=0; i<events.size(); i++){
       event_duration = event_duration.plus(events.get(i).getDuration());
     }
     setDuration(event_duration);
-
-  }
-  public Duration getDuration(){
-    return event_duration;
   }
 
-  public void addEvent(Event e){
+  protected void addEvent(Event e){
     events.add(e);
-  }
-
-  public void setProj_name(String proj_name){
-    name = proj_name;
-  }
-
-  private void delete(Event e){
-    if (events.contains(e)){
-          events.remove(e);
-    }
-  }
-
-  public List<Event> getEvents(){
-    return events;
   }
 
   public void acceptVisitor(Visitor visitor){

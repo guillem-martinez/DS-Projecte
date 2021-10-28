@@ -5,42 +5,38 @@ public class Client {
 
   public static void main(String[] args) throws InterruptedException {
 
+
     Clock clock = Clock.getInstance();
-    //Clock.initializeClock();
 
-    Project master = new Project("Padre", null);
-    Task t1 = new Task("Tasca1", master);
-    Project p1 = new Project("Project1", master);
-    Task t2 = new Task("Tasca2", p1);
-    Project p2 = new Project("Project2", p1);
-    Task t3 = new Task("Tasca3", p2);
-    Task t4 = new Task("Tasca4", p2);
+    Project root = new Project("root", null);
+    Project p1 = new Project("P1", root);
+    Project p2 = new Project("P2", root);
+    Task t1 = new Task("T1", root);
+    Task t2 = new Task("T2", p1);
+    Task t3 = new Task("T3", p2);
 
+    Print Printer = Print.getInstance(root);
 
-    Print treePrinter = Print.getInstance(master);
-
-    //Print treePrinter = new Print(master);
-
-
+    Thread.sleep(4000);
     t1.startTask();
-    //Thread.sleep(1000);
+    Thread.sleep(4000);
     t2.startTask();
-    //Thread.sleep(1000);
-    t3.startTask();
-    //Thread.sleep(1000);
-    t4.startTask();
-    //Thread.sleep(1000);
-    //t1.calculateDuration();
-    //System.out.println(t1.getDuration());
+    Thread.sleep(2000);
+
+    clock.stop();
 
 
-    //clock.stop();
+
+
+
 
 
 
 
 
   }
+
+
 
 
 }

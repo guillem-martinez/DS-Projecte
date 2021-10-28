@@ -2,6 +2,9 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+//Leaf element of Composite pattern that extends functionality of Event
 public class Task extends Event {
 
   public ArrayList<Interval> task_intervals;
@@ -12,32 +15,32 @@ public class Task extends Event {
     System.out.println(name+" SUCCESSFUL");
   }
 
-  @Override
-  public void addEvent(Event event){}
+  //getters
+  public ArrayList<Interval> getTask_intervals(){ return task_intervals;}
 
-  public void setTaskName(String name){
-    this.name = name;
-  }
-  
-  public Duration getDuration(){
-    return event_duration;
-  }
-
-  public void startTask(){
+  protected void startTask(){
     task_intervals.add(new Interval(this));
   }
 
-  public ArrayList<Interval> getTask_intervals(){ return task_intervals;}
-
   @Override
-  public void calculateDuration() {
+  protected void addEvent(Event event){}
+
+
+  //Calculates the durations of all his childs(Intervals)
+  @Override
+  protected void calculateDuration() {
     event_duration = Duration.ZERO;
     for(int i=0; i<task_intervals.size(); i++){
       event_duration = event_duration.plus(task_intervals.get(i).getDuration());
     }
-
     setDuration(event_duration);
+  }
 
+  protected void stopTask(){
+    Interval last = task_intervals != null && !task_intervals.isEmpty() ? task_intervals.get(task_intervals.size() - 1) : null;
+    last.endInterval();
+    this.setEndTime(last.getEndTime());
+    this.setDuration(last.getDuration());
   }
 
   public void acceptVisitor(Visitor visitor){
@@ -45,7 +48,6 @@ public class Task extends Event {
     for(int i=0; i<task_intervals.size(); i++){
       task_intervals.get(i).acceptVisitor(visitor);
     }
-
 }
 
 
