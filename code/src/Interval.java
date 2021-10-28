@@ -17,6 +17,9 @@ public class Interval implements Observer {
     }
     Clock.getInstance().addObserver(this);
   }
+  public Task getTask(){
+    return task;
+  }
 
 
   //The update() method it is called whenever the observable (clock) changes state.

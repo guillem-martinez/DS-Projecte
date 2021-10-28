@@ -33,7 +33,7 @@ public class Print implements Visitor {
 
   @Override
   public void visitInterval(Interval i) {
-    System.out.println("Inici: "+i.getInitTime()+"\tFinal: "+i.getEndTime());
+    System.out.println("Interval "+ "child of " + i.getTask().getName() + "\t" +  i.getInitTime()+"\tFinal: "+i.getEndTime());
   }
 
   public void visitProject(Project p) {
