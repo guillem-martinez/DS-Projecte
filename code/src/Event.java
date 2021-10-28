@@ -29,7 +29,9 @@ public abstract class Event{
   public abstract void addEvent(Event event);
 
 
-  public Event getFather(Event e) {return father;}
+
+
+  public Event getFather() {return father;}
   public Duration getDuration(){return event_duration;}
   public abstract void calculateDuration();
   public abstract void acceptVisitor(Visitor visitor);

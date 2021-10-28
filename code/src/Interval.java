@@ -14,7 +14,6 @@ public class Interval implements Observer {
 
   public Interval(Task t){
     task = t;
-
     Clock.getInstance().addObserver(this);
   }
 

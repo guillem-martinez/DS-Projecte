@@ -4,12 +4,20 @@ public class Print implements Visitor {
     root.acceptVisitor(this); //hacemos que el Proyecto padre acepte un visitor
   }
   public void visitTask(Task t) {
-    System.out.println("Task: "+t.getName()+"Duration"+t.getDuration());
+    System.out.println("Task: " + t.getName()+ "\t" + "Father: " + t.getFather().getName() + "\t"+"Duration: " + t.getDuration() + "\n");
   }
+  //task.toString() devuelve esto
+  //Task T1 Parent:P1 Duration: 1h24min3s
 
   public void visitProject(Project p) {
 
-    System.out.println("Project: "+p.getName()+"Duration"+p.getDuration());
+    if(p.getFather() == null){
+      System.out.println("Project: "+p.getName()+"\t" + "ROOT" + "\t"+"Duration: "+p.getDuration()+"\n");
+    }
+    else{
+      System.out.println("Project: "+p.getName()+"\t" + "Father: " + p.getFather().getName() + "\t"+"Duration: "+p.getDuration()+"\n");
+    }
+
   }
 
 }

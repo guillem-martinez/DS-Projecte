@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Task extends Event {
 
-  private ArrayList<Interval> task_intervals;
+  public ArrayList<Interval> task_intervals;
 
   public Task(String name, Event father) {
     super(name,father);
