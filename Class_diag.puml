@@ -3,69 +3,97 @@
 
 
 class Project{
-# proj_name : String[]
-- elements: List<Event>
-+ startProject()
+- events : List<Event>
++ Project()
++ calculateDuration()
++ getDuration() : Duration
++ addEvent(e : Event)
 + endProject()
-+ getChildren()
-+ add(e : Event)
++ setProj_name(proj_name : String[])
 - delete(e : Event)
 }
 
 class Task{
-- task_intervals : List<Interval>
-- task_duration : duration
-- startTask()
-- endTask()
-+ setTaskName(name: String[])
-+acceptVisitor()
+- task_intervals : ArrayList<Interval>
++ Task()
++ addEvent(event : Event)
++ setTaskName(name : String[])
++ getDuration() : Duration
++ startTask()
++ getTask_intervals() : ArrayList<interval>
++ calculateDuration()
++ acceptVisitor(visitor : Visitor)
 }
 
 abstract Event{
-# name: String[]
-- addEvent(t : Task)
-- deleteEvent(t : Task)
-- getChildren()
-+ acceptVisitor()
-+ getName()
-# totalTime(listIntervals : List<Interval>)
-# printTime()
+# name : String[]
+# initTime : LocalDateTime
+# endTime : LocalDateTime
+# event_duration : Duration
+- father : Event
++ Event()
++ setName(n : String[])
++ getName() : String[]
++ //addEvent(event : Event)//
++ getInitTime() : LocalDateTime
++ getEndTime() : LocalDateTime
++ setInitTime()
++ setEndTime()
++ setDuration()
++ getFather() : Event
++ getDuration() : Duration
++ //calculateDuration()//
++ //acceptVisitor(visitor : Visitor)//
 }
 
 class Clock{
 - timer : Timer
 - dateTime : LocalDateTime
-- initializeClock()
-+ getInstance()
+- instance : Clock
+- Clock()
++ //getInstance() : Clock//
 + getDateTime() : LocalDateTime
 + stop()
-- tick()
+- //tick()//
++ //notifyObservers()//
 }
 
 class Interval{
-- initTime: DateTime
-- endTime: DateTime
-- duration: Duration /'cada golpe de reloj incremento'/
-+ getInitTime()
-+ getEndTime()
-+ getDuration()
+- initTime : LocalDateTime
+- endTime : DateTime
+- duration : Duration /'cada golpe de reloj incremento'/
+- task : Task
++ Interval(t : Task)
++ getTask() : Task
++ update()
++ getInitTime() : LocalDateTime
++ getEndTime() : LocalDateTime
++ getDuration() : Duration
++ endInterval()
++ acceptVisitor(visitor : Visitor)
 }
 
 interface Visitor{
-+ visitTask()
-+ visitProject()
++ visitTask(t : Task)
++ visitProject(p : Project)
++ visitInterval(i : Interval)
 }
 
 class JSON{
 + save()
-+ visitTask()
-+ visitProject()
++ visitTask(t : Task)
++ visitProject(p : Project)
 }
 
 class Print{
-+ visitTask()
-+ visitProject()
-+ printElements()
+- root : Event
+- //instance : Print//
++ Print()
++ //getInstance() : Print//
++ printerInterval()
++ visitTask(t : Task)
++ visitInterval(i : Interval)
++ visitProject(p : Project)
 }
 
 package "java.utils"{
