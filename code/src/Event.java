@@ -31,14 +31,28 @@ public abstract class Event{
 
   public LocalDateTime getInitTime(){ return initTime;}
   public LocalDateTime getEndTime(){ return endTime;}
-  public void setInitTime(LocalDateTime dateTime){
-    initTime = dateTime;
+  public void setInitTime(LocalDateTime dateTime) {
+    if (initTime == null) {
+      initTime = dateTime;
+      if(father !=null){
+        father.setInitTime(dateTime);
+
+      }
+    }
   }
   public void setEndTime(LocalDateTime dateTime){
     endTime = dateTime;
   }
+  public void setDuration(Duration childrenDuration){
+    event_duration = childrenDuration;
+    if (father != null) {
+      father.calculateDuration();
+    }
+
+  }
   public Event getFather() {return father;}
   public Duration getDuration(){return event_duration;}
+
   public abstract void calculateDuration();
   public abstract void acceptVisitor(Visitor visitor);
 

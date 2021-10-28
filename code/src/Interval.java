@@ -25,16 +25,24 @@ public class Interval implements Observer {
 
      LocalDateTime now = (LocalDateTime) arg;
 
-    if(initTime == null){
+    if(initTime == null ){
       initTime = now;
+
       task.setInitTime(initTime);
+
     }
+
     //System.out.println("initTime " + initTime + "\nendTime " + endTime);
     endTime = now;
     duration = Duration.between(initTime, endTime);
-    System.out.println("duration");
+    //System.out.println("duration");
     //System.out.println("AFTER BETWEEN");
     task.calculateDuration();
+
+
+    Print.getInstance(null).printerInterval();
+
+
   }
 
   public LocalDateTime getInitTime(){
@@ -50,9 +58,9 @@ public class Interval implements Observer {
     duration = Duration.between(initTime,endTime);
     Clock.getInstance().deleteObserver(this);
   }
-/*
+
   public void acceptVisitor(Visitor visitor){
     visitor.visitInterval(this);
   }
-*/
+
 }

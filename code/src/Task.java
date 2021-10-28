@@ -35,9 +35,19 @@ public class Task extends Event {
     for(int i=0; i<task_intervals.size(); i++){
       event_duration = event_duration.plus(task_intervals.get(i).getDuration());
     }
+
+    setDuration(event_duration);
+
   }
 
   public void acceptVisitor(Visitor visitor){
     visitor.visitTask(this);
-  }
+    for(int i=0; i<task_intervals.size(); i++){
+      task_intervals.get(i).acceptVisitor(visitor);
+    }
+
+}
+
+
+
 }

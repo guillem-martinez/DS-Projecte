@@ -17,21 +17,23 @@ public class Client {
     Task t4 = new Task("Tasca4", p2);
 
 
-    //Print treePrinter = Print.getInstance(master);
+    Print treePrinter = Print.getInstance(master);
+
+    //Print treePrinter = new Print(master);
+
 
     t1.startTask();
-    Thread.sleep(1000);
+    //Thread.sleep(1000);
     t2.startTask();
-    Thread.sleep(1000);
+    //Thread.sleep(1000);
     t3.startTask();
-    Thread.sleep(1000);
+    //Thread.sleep(1000);
     t4.startTask();
-    Thread.sleep(1000);
+    //Thread.sleep(1000);
     //t1.calculateDuration();
     //System.out.println(t1.getDuration());
 
 
-    Print treePrinter = new Print(master);
     //clock.stop();
 
 

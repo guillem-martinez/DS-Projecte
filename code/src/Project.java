@@ -21,6 +21,11 @@ public class Project extends Event{
     for(int i=0; i<events.size(); i++){
       event_duration = event_duration.plus(events.get(i).getDuration());
     }
+    setDuration(event_duration);
+
+  }
+  public Duration getDuration(){
+    return event_duration;
   }
 
   public void addEvent(Event e){
