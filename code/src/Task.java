@@ -27,6 +27,8 @@ public class Task extends Event {
     task_intervals.add(new Interval(this));
   }
 
+  public ArrayList<Interval> getTask_intervals(){ return task_intervals;}
+
   @Override
   public void calculateDuration() {
     event_duration = Duration.ZERO;

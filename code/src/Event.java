@@ -29,8 +29,14 @@ public abstract class Event{
   public abstract void addEvent(Event event);
 
 
-
-
+  public LocalDateTime getInitTime(){ return initTime;}
+  public LocalDateTime getEndTime(){ return endTime;}
+  public void setInitTime(LocalDateTime dateTime){
+    initTime = dateTime;
+  }
+  public void setEndTime(LocalDateTime dateTime){
+    endTime = dateTime;
+  }
   public Event getFather() {return father;}
   public Duration getDuration(){return event_duration;}
   public abstract void calculateDuration();

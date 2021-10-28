@@ -9,11 +9,12 @@ public class Clock extends Observable {
   private static LocalDateTime dateTime;
   private static Timer timer;
   private static Clock instance = null;
-
+/*
   private Clock(){
     timer = new Timer();
+    this.initializeClock();
   }
-
+*/
   public static Clock getInstance() {
     if (instance == null){
       instance = new Clock();
@@ -21,13 +22,14 @@ public class Clock extends Observable {
     return instance;
   }
 
-  public static void initializeClock(){
-    timer = new Timer();
+  private Clock(){
+    timer = new Timer("Reloj");
     TimerTask repeatTask = new TimerTask() {
       @Override
       public void run() {
-        dateTime = LocalDateTime.now();
-        System.out.println(dateTime);
+       // System.out.println("COMENZAMOS EL RUN DEL RELOJ");
+        tick();
+        //System.out.println(dateTime);
       }
     };
     timer.scheduleAtFixedRate(repeatTask,0, 2000);
@@ -42,14 +44,18 @@ public class Clock extends Observable {
     return dateTime;
   }
 
+  private void tick(){
+    dateTime = LocalDateTime.now();
+    setChanged();
+    //System.out.println("DESPUES DE SETCHANGED");
+    notifyObservers(dateTime);
+    //System.out.println("DESPUES DE NOTIFY OBSERVERS");
+
+
+  }
   @Override
   public void notifyObservers(Object arg) {
     super.notifyObservers(arg);
   }
 
-  private void tick(){
-    LocalDateTime time = this.getDateTime();
-    setChanged();
-    notifyObservers(time);
-  }
 }

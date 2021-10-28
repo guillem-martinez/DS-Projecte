@@ -6,7 +6,7 @@ public class Client {
   public static void main(String[] args) throws InterruptedException {
 
     Clock clock = Clock.getInstance();
-    Clock.initializeClock();
+    //Clock.initializeClock();
 
     Project master = new Project("Padre", null);
     Task t1 = new Task("Tasca1", master);
@@ -16,29 +16,22 @@ public class Client {
     Task t3 = new Task("Tasca3", p2);
     Task t4 = new Task("Tasca4", p2);
 
-    t1.startTask();
-    Thread.sleep(4000);
 
-    //System.out.println();
+    //Print treePrinter = Print.getInstance(master);
+
+    t1.startTask();
+    Thread.sleep(1000);
     t2.startTask();
-    Thread.sleep(2000);
-    //t1.getIntervals. get(i).endInterval();
+    Thread.sleep(1000);
+    t3.startTask();
+    Thread.sleep(1000);
+    t4.startTask();
+    Thread.sleep(1000);
+    //t1.calculateDuration();
+    //System.out.println(t1.getDuration());
 
 
     Print treePrinter = new Print(master);
-    //treePrinter
-
-    /*ArrayList<Event> list = (ArrayList) p1.getEvents();
-
-    for (int i=0; i<list.size(); i++)
-    {
-      System.out.println(list.get(i).getName());
-    }
-    */
-
-
-
-
     //clock.stop();
 
 
