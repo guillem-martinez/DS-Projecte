@@ -8,6 +8,8 @@ import java.time.temporal.ChronoUnit;
 //Component Class of the Composite pattern
 public abstract class Event{
 
+
+  protected final static int delay = 2;
   protected String name;
   private Event father;
   protected LocalDateTime initTime;

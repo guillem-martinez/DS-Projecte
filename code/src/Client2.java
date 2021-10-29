@@ -1,4 +1,5 @@
 public class Client2 {
+
   public static void main(String[] args) throws InterruptedException {
     Clock clock = Clock.getInstance();
     //Clock.initializeClock();
@@ -17,6 +18,9 @@ public class Client2 {
 
     Print treePrinter = Print.getInstance(root);
 
+
+
+
     transportation.startTask();
     Thread.sleep(4000);
     transportation.stopTask();
@@ -33,6 +37,7 @@ public class Client2 {
     ///////////////////////
     Thread.sleep(2000);
     SecondList.stopTask();
+    Thread.sleep(2000);
     ///////////////////////
     transportation.startTask();
     Thread.sleep(4000);

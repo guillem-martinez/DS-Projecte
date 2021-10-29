@@ -39,6 +39,8 @@ public class Interval implements Observer {
     duration = Duration.between(initTime, endTime);
     //System.out.println("duration");
     //System.out.println("AFTER BETWEEN");
+
+
     task.calculateDuration();
 
     Print.getInstance(null).printInterval();

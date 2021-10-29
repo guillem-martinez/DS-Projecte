@@ -7,21 +7,27 @@ public class Client {
 
 
     Clock clock = Clock.getInstance();
-
+    //Clock.initializeClock();
     Project root = new Project("root", null);
-    Project p1 = new Project("P1", root);
-    Project p2 = new Project("P2", root);
-    Task t1 = new Task("T1", root);
-    Task t2 = new Task("T2", p1);
-    Task t3 = new Task("T3", p2);
+    Project SWdesign = new Project("software design", root);
+    Project SWtesting = new Project("Software testing", root);
+    Project DB = new Project("databases", root);
+    Task transportation = new Task("transportation", root);
+    Project problems = new Project("problems", SWdesign);
+    Project TimeTracker = new Project ("TimeTracker", SWdesign);
+    Task FirstList = new Task("First List", problems);
+    Task SecondList = new Task("Second List", problems);
+    Task Read = new Task("Read Handout", TimeTracker);
+    Task FirstMilestone = new Task("First Milestone", TimeTracker);
 
-    Print Printer = Print.getInstance(root);
 
-    Thread.sleep(4000);
-    t1.startTask();
-    Thread.sleep(4000);
-    t2.startTask();
-    Thread.sleep(2000);
+    Print treePrinter = Print.getInstance(root);
+
+
+
+
+
+
 
     clock.stop();
 

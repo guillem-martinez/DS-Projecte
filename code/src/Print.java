@@ -20,6 +20,9 @@ public class Print implements Visitor {
     return instance;
   }
 
+
+
+
   public void printInterval(){
     root.acceptVisitor(this);
   }
@@ -39,6 +42,7 @@ public class Print implements Visitor {
 
   @Override
   public void visitTask(Task t) {
+
     System.out.println("Task: " + t.getName()+ "\t" + "child of " + t.getFather().getName() + "\t"+ this.DateFormatter(t.getInitTime())+ "\t"+ this.DateFormatter(t.getEndTime()) + "\t"+"Duration: " + t.humanReadableFormat(t.getDuration())); //
   }
 

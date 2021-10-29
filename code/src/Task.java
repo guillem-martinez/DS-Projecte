@@ -30,9 +30,10 @@ public class Task extends Event {
   protected void calculateDuration() {
     event_duration = Duration.ZERO;
     for(int i=0; i<task_intervals.size(); i++){
+
       event_duration = event_duration.plus(task_intervals.get(i).getDuration());
     }
-    setDuration(event_duration);
+    setDuration(event_duration.plusSeconds(delay));
   }
 
   protected void stopTask(){
