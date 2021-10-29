@@ -31,7 +31,7 @@ public abstract class Event{
   public Duration getDuration(){return event_duration;}
 
   //Setters
-  public void setName(String n ){ this.name = n; }
+  public void setName(String n ){ name = n; }
   public void setInitTime(LocalDateTime dateTime) {
     if (initTime == null) {
       initTime = dateTime;
@@ -60,7 +60,7 @@ public abstract class Event{
 
   public abstract void acceptVisitor(Visitor visitor);
 
-  public static String humanReadableFormat(Duration duration) { //Shows Durations in an understanding way
+  protected static String humanReadableFormat(Duration duration) { //Shows Durations in an understanding way
     duration = duration.truncatedTo(ChronoUnit.SECONDS);
     return duration.toString().substring(2).replaceAll("(\\d[HMS])(?!$)", "$1 ").toLowerCase();
   }

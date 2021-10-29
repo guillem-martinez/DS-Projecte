@@ -4,46 +4,44 @@
 
 class Project{
 - events : List<Event>
-+ Project()
-+ calculateDuration()
-+ getDuration() : Duration
-+ addEvent(e : Event)
-+ endProject()
-+ setProj_name(proj_name : String[])
-- delete(e : Event)
++ Project(name: String, father: Event)
++ getEvents(): List<Event>
+# calculateDuration()
+# addEvent(e : Event)
++ acceptVisitor(visitor : Visitor)
 }
 
 class Task{
 - task_intervals : ArrayList<Interval>
-+ Task()
-+ addEvent(event : Event)
-+ setTaskName(name : String[])
-+ getDuration() : Duration
-+ startTask()
++ Task(name: String, father: Event)
 + getTask_intervals() : ArrayList<interval>
-+ calculateDuration()
+# addEvent(event : Event)
+# startTask()
+# calculateDuration()
+# stopTask()
 + acceptVisitor(visitor : Visitor)
 }
 
 abstract Event{
-# name : String[]
+# name : String
 # initTime : LocalDateTime
 # endTime : LocalDateTime
 # event_duration : Duration
 - father : Event
-+ Event()
-+ setName(n : String[])
-+ getName() : String[]
-+ //addEvent(event : Event)//
++ Event(n : String, f: Event)
++ setName(n : String)
++ setInitTime(dateTime: LocalDateTime)
++ setEndTime(dateTime: LocalDateTime)
++ setDuration(childrenDuration: Duration)
++ getName() : String
 + getInitTime() : LocalDateTime
 + getEndTime() : LocalDateTime
-+ setInitTime()
-+ setEndTime()
-+ setDuration()
 + getFather() : Event
 + getDuration() : Duration
+# //addEvent(event : Event)//
 + //calculateDuration()//
 + //acceptVisitor(visitor : Visitor)//
+# //humanReadableFormat(duration: Duration) : String//
 }
 
 class Clock{
@@ -53,7 +51,7 @@ class Clock{
 - Clock()
 + //getInstance() : Clock//
 + getDateTime() : LocalDateTime
-+ stop()
+# stop()
 - //tick()//
 + //notifyObservers()//
 }
@@ -64,12 +62,12 @@ class Interval{
 - duration : Duration /'cada golpe de reloj incremento'/
 - task : Task
 + Interval(t : Task)
++ update(o: Observable, arg: Object)
 + getTask() : Task
-+ update()
 + getInitTime() : LocalDateTime
 + getEndTime() : LocalDateTime
 + getDuration() : Duration
-+ endInterval()
+# endInterval()
 + acceptVisitor(visitor : Visitor)
 }
 
@@ -82,9 +80,10 @@ interface Visitor{
 class Print{
 - root : Event
 - //instance : Print//
-+ Print()
-+ //getInstance() : Print//
++ Print(rootF: Event)
++ //getInstance(rootF: Event) : Print//
 + printerInterval()
+- DateFormatter(dt: LocalDateTime) : String
 + visitTask(t : Task)
 + visitInterval(i : Interval)
 + visitProject(p : Project)
@@ -104,12 +103,11 @@ abstract Observable{
 }
 
 class Client{
-void main()
+//void main()//
 }
 
 Event <|-- Task
 Event <|-- Project
-
 Event "1" <--* "0..*" Project
 Observable <|-- Clock
 Observer <|-- Interval

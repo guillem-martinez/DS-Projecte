@@ -25,7 +25,6 @@ public class Task extends Event {
   @Override
   protected void addEvent(Event event){}
 
-
   //Calculates the durations of all his childs(Intervals)
   @Override
   protected void calculateDuration() {

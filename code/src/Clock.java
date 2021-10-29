@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 //This Clock is the object Observable that the observers (intervals) will look at it.
-//It is implemented as Singleton for use the same instance of a Clock por the entire program.
+//It is implemented as Singleton for use the same instance of a Clock for the entire program.
 
 public class Clock extends Observable {
 
@@ -13,12 +13,16 @@ public class Clock extends Observable {
   private static Timer timer;
   private static Clock instance = null;
 
+  //Getters
   //Method for getting the Singleton Clock
   public static Clock getInstance() {
     if (instance == null){
       instance = new Clock();
     }
     return instance;
+  }
+  public LocalDateTime getDateTime(){
+    return dateTime;
   }
 
   private Clock(){
@@ -32,16 +36,12 @@ public class Clock extends Observable {
       }
     };
     //We set the period to 2 seconds
-    timer.scheduleAtFixedRate(repeatTask,0, 2000);
+    timer.scheduleAtFixedRate(repeatTask,0, 2000);//Executes a task again and again every <period> time
   }
 
-  public void stop(){
+  protected void stop(){
     timer.cancel();
     instance.deleteObservers();
-  }
-
-  public LocalDateTime getDateTime(){
-    return dateTime;
   }
 
   private void tick(){

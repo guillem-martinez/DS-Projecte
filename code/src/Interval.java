@@ -13,7 +13,6 @@ public class Interval implements Observer {
   private LocalDateTime endTime;
   private Duration duration;
   private Task task;
-  private DateTimeFormatter formatter;
 
   public Interval(Task t){
     task = t;
