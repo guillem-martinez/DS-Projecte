@@ -1,13 +1,13 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Client {
+public class Client { //APENDIX A
 
   public static void main(String[] args) throws InterruptedException {
 
 
     Clock clock = Clock.getInstance();
-    //Clock.initializeClock();
+
     Project root = new Project("root", null);
     Project SWdesign = new Project("software design", root);
     Project SWtesting = new Project("Software testing", root);
@@ -21,25 +21,9 @@ public class Client {
     Task FirstMilestone = new Task("First Milestone", TimeTracker);
 
 
-    Print treePrinter = Print.getInstance(root);
-
-
-
-
-
-
+    Print Printer = Print.getInstance(root);
 
     clock.stop();
-
-
-
-
-
-
-
-
-
-
   }
 
 

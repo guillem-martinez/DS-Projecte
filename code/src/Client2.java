@@ -1,8 +1,8 @@
 public class Client2 {
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) throws InterruptedException { //APENDIX B
     Clock clock = Clock.getInstance();
-    //Clock.initializeClock();
+
     Project root = new Project("root", null);
     Project SWdesign = new Project("software design", root);
     Project SWtesting = new Project("Software testing", root);
@@ -18,9 +18,7 @@ public class Client2 {
 
     Print treePrinter = Print.getInstance(root);
 
-
-
-
+    
     transportation.startTask();
     Thread.sleep(4000);
     transportation.stopTask();
