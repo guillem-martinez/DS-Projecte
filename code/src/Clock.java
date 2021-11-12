@@ -1,7 +1,8 @@
 import java.time.LocalDateTime;
+import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Observable;
+
 
 
 //This Clock is the object Observable that the observers (intervals) will look at it.
@@ -16,35 +17,37 @@ public class Clock extends Observable {
   //Getters
   //Method for getting the Singleton Clock
   public static Clock getInstance() {
-    if (instance == null){
+    if (instance == null) {
       instance = new Clock();
     }
     return instance;
   }
-  public LocalDateTime getDateTime(){
+
+  public LocalDateTime getDateTime() {
     return dateTime;
   }
 
-  private Clock(){
+  private Clock() {
     timer = new Timer("Reloj");
     TimerTask repeatTask = new TimerTask() {
       @Override
       public void run() {
-       // System.out.println("COMENZAMOS EL RUN DEL RELOJ");
+        // System.out.println("COMENZAMOS EL RUN DEL RELOJ");
         tick();
         //System.out.println(dateTime);
       }
     };
     //We set the period to 2 seconds
-    timer.scheduleAtFixedRate(repeatTask,0, 2000);//Executes a task again and again every <period> time
+    //Executes a task again and again every <period> time
+    timer.scheduleAtFixedRate(repeatTask, 0, 2000);
   }
 
-  protected void stop(){
+  protected void stop() {
     timer.cancel();
     instance.deleteObservers();
   }
 
-  private void tick(){
+  private void tick() {
     dateTime = LocalDateTime.now();
     setChanged();
     //System.out.println("DESPUES DE SETCHANGED");

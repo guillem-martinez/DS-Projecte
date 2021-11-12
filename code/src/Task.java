@@ -37,7 +37,8 @@ public class Task extends Event {
   }
 
   protected void stopTask() {
-    Interval last = taskIntervals != null && !taskIntervals.isEmpty() ? taskIntervals.get(taskIntervals.size() - 1) : null;
+    Interval last = taskIntervals != null && !taskIntervals.isEmpty()
+        ? taskIntervals.get(taskIntervals.size() - 1) : null;
     assert last != null;
     last.endInterval();
     this.setEndTime(last.getEndTime());

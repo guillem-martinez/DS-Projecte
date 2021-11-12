@@ -27,6 +27,7 @@ abstract Event{
 # initTime : LocalDateTime
 # endTime : LocalDateTime
 # event_duration : Duration
+# tags : list<String>
 - father : Event
 + Event(n : String, f: Event)
 + setName(n : String)
@@ -102,6 +103,7 @@ abstract Observable{
 }
 }
 
+
 class Client{
 //void main()//
 }
@@ -116,6 +118,18 @@ Interval "0..*" --*  "1" Task
 Event <-- Client
 Visitor <-- Client
 Print --|> Visitor
+
+class Search{
+- root : Event
+- //instance : Search//
++ Search(rootF: Event)
++ //getInstance(rootF: Event) : Search//
++ printerInterval()
+- DateFormatter(dt: LocalDateTime) : String
++ visitTask(t : Task)
++ visitInterval(i : Interval)
++ visitProject(p : Project)
+}
 
 
 

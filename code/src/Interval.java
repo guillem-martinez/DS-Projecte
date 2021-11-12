@@ -1,7 +1,7 @@
-import java.time.LocalDateTime;
-import java.util.Observer;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Observable;
+import java.util.Observer;
 
 
 //Observer that is looking to the Observable (clock) and updates for every tick in clock
@@ -13,9 +13,9 @@ public class Interval implements Observer {
   private Duration duration;
   private Task task;
 
-  public Interval(Task t){
+  public Interval(Task t) {
     task = t;
-    if(task.getInitTime() == null){
+    if (task.getInitTime() == null) {
       task.setInitTime(task.initTime);
     }
     Clock.getInstance().addObserver(this);
@@ -25,13 +25,12 @@ public class Interval implements Observer {
   @Override
   public void update(Observable o, Object arg) {
 
-     LocalDateTime now = (LocalDateTime) arg;
+    LocalDateTime now = (LocalDateTime) arg;
 
-    if(initTime == null ){
+    if (initTime == null) {
       initTime = now;
 
       task.setInitTime(initTime);
-
     }
     //System.out.println("initTime " + initTime + "\nendTime " + endTime);
     endTime = now;
@@ -44,22 +43,29 @@ public class Interval implements Observer {
   }
 
   //Getters
-  public LocalDateTime getInitTime() { return initTime; }
-  public LocalDateTime getEndTime(){
+  public LocalDateTime getInitTime() {
+    return initTime;
+  }
+
+  public LocalDateTime getEndTime() {
     return endTime;
   }
-  public Duration getDuration() { return duration;}
-  public Task getTask(){
+
+  public Duration getDuration() {
+    return duration;
+  }
+
+  public Task getTask() {
     return task;
   }
 
-  protected void endInterval(){
+  protected void endInterval() {
     endTime = LocalDateTime.now();
-    duration = Duration.between(initTime,endTime);
+    duration = Duration.between(initTime, endTime);
     Clock.getInstance().deleteObserver(this);
   }
 
-  public void acceptVisitor(Visitor visitor){
+  public void acceptVisitor(Visitor visitor) {
     visitor.visitInterval(this);
   }
 
