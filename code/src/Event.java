@@ -1,25 +1,24 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 
 
 //Component Class of the Composite pattern
-public abstract class Event{
+public abstract class Event {
 
 
-  protected final static int delay = 2;
+  protected static final int delay = 2;
   protected String name;
   private Event father;
   protected LocalDateTime initTime;
   protected LocalDateTime endTime;
-  protected Duration event_duration;
+  protected Duration eventDuration;
 
-  public Event(String n, Event f){
+  public Event(String n, Event f) {
       name = n;
       father = f;
-      event_duration = Duration.ZERO;
+      eventDuration = Duration.ZERO;
       if (father != null) {
         father.addEvent(this);
       }
@@ -30,7 +29,7 @@ public abstract class Event{
   public LocalDateTime getInitTime(){ return initTime;}
   public LocalDateTime getEndTime(){ return endTime;}
   public Event getFather() {return father;}
-  public Duration getDuration(){return event_duration;}
+  public Duration getDuration(){return eventDuration;}
 
   //Setters
   public void setName(String n ){ name = n; }
@@ -51,7 +50,7 @@ public abstract class Event{
     }
   }
   public void setDuration(Duration childrenDuration){
-    event_duration = childrenDuration;
+    eventDuration = childrenDuration;
     if (father != null) {
       father.calculateDuration();
     }
@@ -62,7 +61,7 @@ public abstract class Event{
 
   public abstract void acceptVisitor(Visitor visitor);
 
-  protected static String humanReadableFormat(Duration duration) { //Shows Durations in an understanding way
+  protected String humanReadableFormat(Duration duration) { //Shows Durations in an understanding way
     duration = duration.truncatedTo(ChronoUnit.SECONDS);
     return duration.toString().substring(2).replaceAll("(\\d[HMS])(?!$)", "$1 ").toLowerCase();
   }

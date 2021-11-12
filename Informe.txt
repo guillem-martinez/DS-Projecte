@@ -1,0 +1,11 @@
+INFORME MILESTONE 1 TIME_TRACKER
+
+Esta primera entrega del proyecto ha sido desarrollada de una forma muy coral. Hemos desarrollado el código casi todas las veces todos los integrantes del grupo de forma simultánea. Para hacerlo de esta forma hemos usado la herramienta Code With Me del IntelliJ IDEA. Esta herramienta permitía que todos los integrantes del grupo nos conectáramos al ordenador de uno de nosotros y "codeabamos" todos a la vez. 
+
+Aún asi nos hemos distribuido algunas tareas de la siguiente forma:
+Pau se centró en que el UML y el código fuesen iguales, mirando así los posibles problemas de acoplamiento...
+Cristian implementó el patrón Observer, con el Clock como Observable i el Intervalo de Observer, analizando de que forma había que usar los métodos.
+Gabriel implementó el patrón Composite y hizo la distribución pertinente de atributos y métodos.
+Guillem se centró en el patrón Visitor y la forma de "printear" el árbol, formateando los datos para hacerlos entendibles.
+
+No obstante, todos trabajamos en los apartados en los cuales nos centramos de forma individual. Pero si teníamos que resaltar las tareas que le ha dedicado mas tiempo de forma individual cada integrante, serían las que hemos especificado anteriormente.

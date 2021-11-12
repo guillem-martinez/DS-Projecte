@@ -18,7 +18,7 @@ public class Client2 {
 
     Print treePrinter = Print.getInstance(root);
 
-    
+
     transportation.startTask();
     Thread.sleep(4000);
     transportation.stopTask();

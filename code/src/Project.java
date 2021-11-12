@@ -1,6 +1,5 @@
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -26,11 +25,11 @@ public class Project extends Event{
   //Calculates the duration of all his childs (Task/Projects with more childs or not) and Adds all the durations.
   @Override
   protected void calculateDuration() {
-    event_duration = Duration.ZERO;
+    eventDuration = Duration.ZERO;
     for(int i=0; i<events.size(); i++){
-      event_duration = event_duration.plus(events.get(i).getDuration());
+      eventDuration = eventDuration.plus(events.get(i).getDuration());
     }
-    setDuration(event_duration.plusSeconds(delay));
+    setDuration(eventDuration.plusSeconds(delay));
   }
 
   protected void addEvent(Event e){

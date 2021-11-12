@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Observer;
 import java.time.Duration;
 import java.util.Observable;
@@ -37,8 +36,6 @@ public class Interval implements Observer {
     //System.out.println("initTime " + initTime + "\nendTime " + endTime);
     endTime = now;
     duration = Duration.between(initTime, endTime);
-    //System.out.println("duration");
-    //System.out.println("AFTER BETWEEN");
 
 
     task.calculateDuration();

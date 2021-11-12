@@ -1,20 +1,18 @@
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Print implements Visitor {
 
   private Event root;
   private static Print instance; //Singleton Printer
 
-  public Print(Event rootF){
+  public Print(Event rootF) {
     root = rootF; //We save the father of the tree in the printer for recursive printer
     rootF.acceptVisitor(this); //To start printing the tree by the root
   }
 
   public static Print getInstance(Event rootF) {
-    if(instance==null){
+    if (instance == null) {
       instance = new Print(rootF);
     }
     return instance;
@@ -23,17 +21,15 @@ public class Print implements Visitor {
 
 
 
-  public void printInterval(){
+  public void printInterval() {
     root.acceptVisitor(this);
   }
 
-  private String DateFormatter (LocalDateTime dt){
+  private String dateFormatter(LocalDateTime dt) {
     String formated;
-    if(dt == null)
-    {
+    if (dt == null) {
       formated = "null";
-    }
-    else {
+    } else {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
       formated = dt.format(formatter);
     }
@@ -43,21 +39,34 @@ public class Print implements Visitor {
   @Override
   public void visitTask(Task t) {
 
-    System.out.println("Task: " + t.getName()+ "\t" + "child of " + t.getFather().getName() + "\t"+ this.DateFormatter(t.getInitTime())+ "\t"+ this.DateFormatter(t.getEndTime()) + "\t"+"Duration: " + t.humanReadableFormat(t.getDuration())); //
+    System.out.println("Task: " + t.getName()
+        + "\t" + "child of " + t.getFather().getName()
+        + "\t" + this.dateFormatter(t.getInitTime())
+        + "\t" + this.dateFormatter(t.getEndTime())
+        + "\t" + "Duration: " + t.humanReadableFormat(t.getDuration())); //
   }
 
   @Override
   public void visitInterval(Interval i) {
-    System.out.println("Interval "+ "child of " + i.getTask().getName() + "\t" +  this.DateFormatter(i.getInitTime())+"\tFinal: "+this.DateFormatter(i.getEndTime()));
+    System.out.println("Interval " + "child of " + i.getTask().getName()
+        + "\t" + this.dateFormatter(i.getInitTime())
+        + "\t" + "Final: " + this.dateFormatter(i.getEndTime()));
   }
 
   public void visitProject(Project p) {
-    if(p.getFather() == null){ //If it's the root shows that it hasn't got a father
+    if (p.getFather() == null) { //If it's the root shows that it hasn't got a father
       System.out.println("\n----------------------------------------");
-      System.out.println("Project: "+p.getName()+"\t" + "child of null" + "\t"+ this.DateFormatter(p.getInitTime())+ "\t" + this.DateFormatter(p.getEndTime()) + "\t"+"Duration: "+p.humanReadableFormat(p.getDuration()));
-    }
-    else{
-      System.out.println("Project: "+p.getName()+"\t" + "child of: " + p.getFather().getName() + "\t"+ this.DateFormatter(p.getInitTime())+ "\t" + this.DateFormatter(p.getEndTime()) +"\t"+"Duration: "+p.humanReadableFormat(p.getDuration()));
+      System.out.println("Project: " + p.getName()
+          + "\t" + "child of null"
+          + "\t" + this.dateFormatter(p.getInitTime())
+          + "\t" + this.dateFormatter(p.getEndTime())
+          + "\t" + "Duration: " + p.humanReadableFormat(p.getDuration()));
+    } else {
+      System.out.println("Project: " + p.getName()
+          + "\t" + "child of: " + p.getFather().getName()
+          + "\t" + this.dateFormatter(p.getInitTime())
+          + "\t" + this.dateFormatter(p.getEndTime())
+          + "\t" + "Duration: " + p.humanReadableFormat(p.getDuration()));
     }
   }
 
