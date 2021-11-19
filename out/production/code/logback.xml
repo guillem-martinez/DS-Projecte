@@ -1,0 +1,11 @@
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+
+    </appender>
+
+
+    <logger name="TimeTracker" level="debug" addivity="false">
+
+    </logger>
+</configuration>

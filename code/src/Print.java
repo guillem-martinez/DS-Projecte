@@ -1,10 +1,13 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+//PREGUNTAR POR LOGGERS I DBC
 public class Print implements Visitor {
 
   private Event root;
   private static Print instance; //Singleton Printer
+  private  Logger logger = LoggerFactory.getLogger(Print.class);
 
   public Print(Event rootF) {
     root = rootF; //We save the father of the tree in the printer for recursive printer
@@ -38,12 +41,17 @@ public class Print implements Visitor {
 
   @Override
   public void visitTask(Task t) {
-
+/*
     System.out.println("Task: " + t.getName()
         + "\t" + "child of " + t.getFather().getName()
         + "\t" + this.dateFormatter(t.getInitTime())
         + "\t" + this.dateFormatter(t.getEndTime())
-        + "\t" + "Duration: " + t.humanReadableFormat(t.getDuration())); //
+        + "\t" + "Duration: " + t.humanReadableFormat(t.getDuration()));*/
+    logger.info("Task: " + t.getName()
+        + "\t" + "child of " + t.getFather().getName()
+        + "\t" + this.dateFormatter(t.getInitTime())
+        + "\t" + this.dateFormatter(t.getEndTime())
+        + "\t" + "Duration: " + t.humanReadableFormat(t.getDuration()));
   }
 
   @Override

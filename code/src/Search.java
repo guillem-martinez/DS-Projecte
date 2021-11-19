@@ -16,7 +16,7 @@ public class Search implements Visitor {
     if (instance == null) {
       instance = new Search(rootF);
     }
-      return instance;
+    return instance;
   }
 
   @Override
