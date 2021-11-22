@@ -11,10 +11,10 @@ public class Project extends Event{
   private List<Event> events; //
 
 
-  public Project(String name, Event father){
-    super(name, father);
+  public Project(String name, Event father, List<String> tags){
+    super(name, father, tags);
     events = new ArrayList<Event>();
-    System.out.println(name+" SUCCESSFUL");
+    logger.debug(name+" created successfully");
   }
 
   //Getters

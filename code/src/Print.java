@@ -12,13 +12,17 @@ public class Print implements Visitor {
   public Print(Event rootF) {
     root = rootF; //We save the father of the tree in the printer for recursive printer
     rootF.acceptVisitor(this); //To start printing the tree by the root
+    logger.debug("Only one printer instantiated");
+
   }
 
   public static Print getInstance(Event rootF) {
     if (instance == null) {
       instance = new Print(rootF);
     }
+
     return instance;
+
   }
 
 
@@ -56,21 +60,24 @@ public class Print implements Visitor {
 
   @Override
   public void visitInterval(Interval i) {
-    System.out.println("Interval " + "child of " + i.getTask().getName()
+    /*System.out.println("Interval " + "child of " + i.getTask().getName()
+        + "\t" + this.dateFormatter(i.getInitTime())
+        + "\t" + "Final: " + this.dateFormatter(i.getEndTime()));*/
+    logger.info("Interval " + "child of " + i.getTask().getName()
         + "\t" + this.dateFormatter(i.getInitTime())
         + "\t" + "Final: " + this.dateFormatter(i.getEndTime()));
   }
 
   public void visitProject(Project p) {
     if (p.getFather() == null) { //If it's the root shows that it hasn't got a father
-      System.out.println("\n----------------------------------------");
-      System.out.println("Project: " + p.getName()
+      logger.info("\n----------------------------------------");
+      logger.info("Project: " + p.getName()
           + "\t" + "child of null"
           + "\t" + this.dateFormatter(p.getInitTime())
           + "\t" + this.dateFormatter(p.getEndTime())
           + "\t" + "Duration: " + p.humanReadableFormat(p.getDuration()));
     } else {
-      System.out.println("Project: " + p.getName()
+      logger.info("Project: " + p.getName()
           + "\t" + "child of: " + p.getFather().getName()
           + "\t" + this.dateFormatter(p.getInitTime())
           + "\t" + this.dateFormatter(p.getEndTime())

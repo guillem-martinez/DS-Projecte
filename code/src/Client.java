@@ -4,7 +4,7 @@ public class Client { //APENDIX A
 
 
     Clock clock = Clock.getInstance();
-
+/*
     Project root = new Project("root", null);
     Project swDesign = new Project("software design", root);
     Project swTesting = new Project("Software testing", root);
@@ -21,6 +21,8 @@ public class Client { //APENDIX A
     Print printer = Print.getInstance(root);
 
     clock.stop();
+
+ */
   }
 
 

@@ -1,14 +1,15 @@
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 
 //Leaf element of Composite pattern that extends functionality of Event
 public class Task extends Event {
 
   public ArrayList<Interval> taskIntervals;
-
-  public Task(String name, Event father) {
-    super(name, father);
+//Related problems estan al MAIN
+  public Task(String name, Event father, List<String> tags) {
+    super(name, father, tags);
     taskIntervals = new ArrayList<Interval>();
     System.out.println(name + " SUCCESSFUL");
   }
@@ -43,6 +44,7 @@ public class Task extends Event {
     last.endInterval();
     this.setEndTime(last.getEndTime());
     this.setDuration(last.getDuration());
+    logger.debug("Task finalized");
   }
 
   public void acceptVisitor(Visitor visitor) {
