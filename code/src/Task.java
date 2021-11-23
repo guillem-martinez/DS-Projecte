@@ -11,7 +11,7 @@ public class Task extends Event {
   public Task(String name, Event father, List<String> tags) {
     super(name, father, tags);
     taskIntervals = new ArrayList<Interval>();
-    System.out.println(name + " SUCCESSFUL");
+    logger.info(name + " created successfully");
   }
 
   //getters
