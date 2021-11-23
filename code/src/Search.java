@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,17 +9,21 @@ public class Search implements Visitor {
 
   private Event root;
   private static Search instance; //Singleton Printer
-  private List<String> found;
+  private String found;
+  private Logger logger = LoggerFactory.getLogger(Search.class);
 
-  public Search(Event rootF) {
+
+
+  public Search(Event rootF, String required) {
     root = rootF; //We save the father of the tree in the printer for recursive printer
+    found = required;
     rootF.acceptVisitor(this); //To start printing the tree by the root
-    found = new ArrayList<String>();
   }
 
-  public static Search getInstance(Event rootF) {
+  public static Search getInstance(Event rootF,String required) {
     if (instance == null) {
-      instance = new Search(rootF);
+
+      instance = new Search(rootF,required);
     }
     return instance;
   }
@@ -24,10 +31,33 @@ public class Search implements Visitor {
   @Override
   public void visitProject(Project p) {
     //if (p.getTag().contains(Tag a buscar)-->found.add(add p.getName())
+    if(p.getTags()!= null){
+      for(String iterator : p.getTags()) {
+        if(iterator == this.found) {
+          logger.info("Project " + p.getName() + " has Tag: " + this.found);
+          //System.out.println("Project " + p.getName() + " has Tag: " + this.found);
+        }
+
+      }
+    }
+
+
+
+
   }
 
   @Override
   public void visitTask(Task t) {
+    if(t.getTags() != null){
+      for (String iterator : t.getTags()) {
+        if (iterator == this.found) {
+          logger.info("Task " + t.getName() + " has Tag: " + this.found);
+          //System.out.println("Task " + t.getName() + " has Tag: " + this.found);
+        }
+      }
+    }
+
+
 
   }
 

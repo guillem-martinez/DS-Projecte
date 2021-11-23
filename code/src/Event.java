@@ -36,6 +36,8 @@ public abstract class Event {
     return name;
   }
 
+  public List<String> getTags(){return tags; }
+
   public LocalDateTime getInitTime() {
     return initTime;
   }
