@@ -1,10 +1,12 @@
+package Fita1;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-//Composite element of Composite pattern that extends functionality of Event
+//Composite element of Composite pattern that extends functionality of Fita1.Event
 public class Project extends Event{
 
 
@@ -14,7 +16,15 @@ public class Project extends Event{
   public Project(String name, Event father, List<String> tags){
     super(name, father, tags);
     events = new ArrayList<Event>();
-    logger.debug(name+" created successfully");
+    logger.debug("Project: " + name + " created successfully");
+    logger.debug("Project: " + name + " has this events " + events);
+  }
+
+  @Override
+  protected boolean invariant() {
+    super.invariant();
+    return (this.events != null);
+
   }
 
   //Getters
@@ -22,7 +32,7 @@ public class Project extends Event{
     return events;
   }
 
-  //Calculates the duration of all his childs (Task/Projects with more childs or not) and Adds all the durations.
+  //Calculates the duration of all his childs (Fita1.Task/Projects with more childs or not) and Adds all the durations.
   @Override
   protected void calculateDuration() {
     eventDuration = Duration.ZERO;
@@ -37,6 +47,9 @@ public class Project extends Event{
   }
 
   public void acceptVisitor(Visitor visitor){
+
+    assert invariant();
+
     visitor.visitProject(this);
     for(int i=0; i<events.size(); i++){
       events.get(i).acceptVisitor(visitor);

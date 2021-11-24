@@ -1,3 +1,5 @@
+package Fita1;
+
 public interface Visitor {
   void visitTask(Task t);
 

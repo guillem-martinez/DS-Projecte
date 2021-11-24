@@ -1,3 +1,10 @@
+package Fita1;
+
+import Fita1.Clock;
+import Fita1.Print;
+import Fita1.Project;
+import Fita1.Task;
+
 import java.util.Arrays;
 
 public class Client2 {

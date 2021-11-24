@@ -1,9 +1,11 @@
+package Fita1;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 
-//Leaf element of Composite pattern that extends functionality of Event
+//Leaf element of Composite pattern that extends functionality of Fita1.Event
 public class Task extends Event {
 
   public ArrayList<Interval> taskIntervals;
@@ -11,7 +13,14 @@ public class Task extends Event {
   public Task(String name, Event father, List<String> tags) {
     super(name, father, tags);
     taskIntervals = new ArrayList<Interval>();
-    logger.info(name + " created successfully");
+    logger.info("Task: " + name + " created successfully");
+  }
+
+  @Override
+  protected boolean invariant() {
+    super.invariant();
+    return (this.taskIntervals !=null && this.getFather() != null);
+
   }
 
   //getters
@@ -44,10 +53,13 @@ public class Task extends Event {
     last.endInterval();
     this.setEndTime(last.getEndTime());
     this.setDuration(last.getDuration());
-    logger.debug("Task finalized");
+    logger.debug("Fita1.Task finalized");
   }
 
   public void acceptVisitor(Visitor visitor) {
+
+    assert invariant();
+
     visitor.visitTask(this);
     for (int i = 0; i < taskIntervals.size(); i++) {
       taskIntervals.get(i).acceptVisitor(visitor);

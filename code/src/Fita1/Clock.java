@@ -1,3 +1,5 @@
+package Fita1;
+
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
@@ -5,8 +7,8 @@ import java.util.TimerTask;
 
 
 
-//This Clock is the object Observable that the observers (intervals) will look at it.
-//It is implemented as Singleton for use the same instance of a Clock for the entire program.
+//This Fita1.Clock is the object Observable that the observers (intervals) will look at it.
+//It is implemented as Singleton for use the same instance of a Fita1.Clock for the entire program.
 
 public class Clock extends Observable {
 
@@ -15,7 +17,7 @@ public class Clock extends Observable {
   private static Clock instance = null;
 
   //Getters
-  //Method for getting the Singleton Clock
+  //Method for getting the Singleton Fita1.Clock
   public static Clock getInstance() {
     if (instance == null) {
       instance = new Clock();

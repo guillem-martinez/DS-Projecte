@@ -1,8 +1,8 @@
+package Fita2;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
+import Fita1.*;
 
 public class Search implements Visitor {
 
@@ -20,7 +20,7 @@ public class Search implements Visitor {
     rootF.acceptVisitor(this); //To start printing the tree by the root
   }
 
-  public static Search getInstance(Event rootF,String required) {
+  public static Search getInstance(Event rootF, String required) {
     if (instance == null) {
 
       instance = new Search(rootF,required);
@@ -34,8 +34,8 @@ public class Search implements Visitor {
     if(p.getTags()!= null){
       for(String iterator : p.getTags()) {
         if(iterator == this.found) {
-          logger.info("Project " + p.getName() + " has Tag: " + this.found);
-          //System.out.println("Project " + p.getName() + " has Tag: " + this.found);
+          logger.info("Fita1.Project " + p.getName() + " has Tag: " + this.found);
+          //System.out.println("Fita1.Project " + p.getName() + " has Tag: " + this.found);
         }
 
       }
@@ -51,8 +51,8 @@ public class Search implements Visitor {
     if(t.getTags() != null){
       for (String iterator : t.getTags()) {
         if (iterator == this.found) {
-          logger.info("Task " + t.getName() + " has Tag: " + this.found);
-          //System.out.println("Task " + t.getName() + " has Tag: " + this.found);
+          logger.info("Fita1.Task " + t.getName() + " has Tag: " + this.found);
+          //System.out.println("Fita1.Task " + t.getName() + " has Tag: " + this.found);
         }
       }
     }

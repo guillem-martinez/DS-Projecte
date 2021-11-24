@@ -4,8 +4,8 @@ Esta primera entrega del proyecto ha sido desarrollada de una forma muy coral. H
 
 Aún asi nos hemos distribuido algunas tareas de la siguiente forma:
 Pau se centró en que el UML y el código fuesen iguales, mirando así los posibles problemas de acoplamiento...
-Cristian implementó el patrón Observer, con el Clock como Observable i el Intervalo de Observer, analizando de que forma había que usar los métodos.
+Cristian implementó el patrón Observer, con el Fita1.Clock como Observable i el Intervalo de Observer, analizando de que forma había que usar los métodos.
 Gabriel implementó el patrón Composite y hizo la distribución pertinente de atributos y métodos.
-Guillem se centró en el patrón Visitor y la forma de "printear" el árbol, formateando los datos para hacerlos entendibles.
+Guillem se centró en el patrón Fita1.Visitor y la forma de "printear" el árbol, formateando los datos para hacerlos entendibles.
 
 No obstante, todos trabajamos en los apartados en los cuales nos centramos de forma individual. Pero si teníamos que resaltar las tareas que le ha dedicado mas tiempo de forma individual cada integrante, serían las que hemos especificado anteriormente.

@@ -1,3 +1,5 @@
+package Fita1;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +31,7 @@ public abstract class Event {
       father.addEvent(this);
     }
     tags = l;
+
   }
 
   //Getters
@@ -67,7 +70,9 @@ public abstract class Event {
 
       }
     }
-    logger.debug("The start time of the Event has been set to NOW");
+    assert invariant();
+
+    logger.debug("The start time of the Fita1.Event has been set to NOW");
   }
 
   public void setEndTime(LocalDateTime dateTime) {
@@ -76,7 +81,9 @@ public abstract class Event {
     if (father != null) {
       father.setEndTime(endTime);
     }
-    logger.debug("The end time of the Event has been set to NOW");
+    assert invariant();
+
+    logger.debug("The end time of the Fita1.Event has been set to NOW");
   }
 
   public void setDuration(Duration childrenDuration) {
@@ -84,6 +91,8 @@ public abstract class Event {
     if (father != null) {
       father.calculateDuration();
     }
+    assert invariant();
+
   }
 
   protected abstract void addEvent(Event event);
@@ -91,6 +100,10 @@ public abstract class Event {
   protected abstract void calculateDuration();
 
   public abstract void acceptVisitor(Visitor visitor);
+
+  protected boolean invariant(){
+    return (this.getDuration().getSeconds() >= 0);
+  }
 
   //Shows Durations in an understanding way
   protected String humanReadableFormat(Duration duration) {
