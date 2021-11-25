@@ -4,6 +4,9 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Observer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 
 //Observer that is looking to the Observable (clock) and updates for every tick in clock
@@ -14,6 +17,7 @@ public class Interval implements Observer {
   private LocalDateTime endTime;
   private Duration duration;
   private Task task;
+  private Logger logger = LoggerFactory.getLogger(Interval.class);
 
   public Interval(Task t) {
     task = t;
@@ -21,6 +25,7 @@ public class Interval implements Observer {
       task.setInitTime(task.initTime);
     }
     Clock.getInstance().addObserver(this);
+    logger.debug("Interval created. From now on observes the clock. It's compulsory assigned to a task");
   }
 
   //The update() method it is called whenever the observable (clock) changes state.
@@ -42,6 +47,7 @@ public class Interval implements Observer {
     task.calculateDuration();
 
     Print.getInstance(null).printInterval();
+
   }
 
   //Getters
@@ -65,6 +71,8 @@ public class Interval implements Observer {
     endTime = LocalDateTime.now();
     duration = Duration.between(initTime, endTime);
     Clock.getInstance().deleteObserver(this);
+
+    logger.debug("End Time of the interval set to NOW and removes him as an observer");
   }
 
   public void acceptVisitor(Visitor visitor) {

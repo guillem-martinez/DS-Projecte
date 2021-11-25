@@ -1,5 +1,8 @@
 package Fita1;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
@@ -15,11 +18,14 @@ public class Clock extends Observable {
   private static LocalDateTime dateTime;
   private static Timer timer;
   private static Clock instance = null;
+  private Logger logger = LoggerFactory.getLogger(Clock.class);
+
 
   //Getters
   //Method for getting the Singleton Fita1.Clock
   public static Clock getInstance() {
     if (instance == null) {
+
       instance = new Clock();
     }
     return instance;
@@ -29,7 +35,10 @@ public class Clock extends Observable {
     return dateTime;
   }
 
+
+  //Private clock constructor where it creates a TimerTask object that calls the tick() function inside.
   private Clock() {
+    logger.trace("Instantiating a Clock ");
     timer = new Timer("Reloj");
     TimerTask repeatTask = new TimerTask() {
       @Override
@@ -40,21 +49,23 @@ public class Clock extends Observable {
       }
     };
     //We set the period to 2 seconds
+    long period = 2000;
+    logger.trace("Setting the period to " + period/1000 + " seconds.");
     //Executes a task again and again every <period> time
-    timer.scheduleAtFixedRate(repeatTask, 0, 2000);
+    timer.scheduleAtFixedRate(repeatTask, 0, period);
   }
 
   protected void stop() {
     timer.cancel();
     instance.deleteObservers();
+    logger.debug("Stopping the clock");
   }
 
   private void tick() {
     dateTime = LocalDateTime.now();
     setChanged();
-    //System.out.println("DESPUES DE SETCHANGED");
     notifyObservers(dateTime);
-    //System.out.println("DESPUES DE NOTIFY OBSERVERS");
+    logger.debug("Clock notify his observers for changing it's own state");
   }
 
   @Override

@@ -14,7 +14,7 @@ public class Print implements Visitor {
   public Print(Event rootF) {
     root = rootF; //We save the father of the tree in the printer for recursive printer
     rootF.acceptVisitor(this); //To start printing the tree by the root
-    logger.debug("Only one printer instantiated");
+    logger.trace("Only one printer instantiated");
 
   }
 
@@ -22,7 +22,6 @@ public class Print implements Visitor {
     if (instance == null) {
       instance = new Print(rootF);
     }
-
     return instance;
 
   }
@@ -53,7 +52,7 @@ public class Print implements Visitor {
         + "\t" + this.dateFormatter(t.getInitTime())
         + "\t" + this.dateFormatter(t.getEndTime())
         + "\t" + "Duration: " + t.humanReadableFormat(t.getDuration()));*/
-    logger.info("Fita1.Task: " + t.getName()
+    logger.info("Task: " + t.getName()
         + "\t" + "child of " + t.getFather().getName()
         + "\t" + this.dateFormatter(t.getInitTime())
         + "\t" + this.dateFormatter(t.getEndTime())
@@ -65,7 +64,7 @@ public class Print implements Visitor {
     /*System.out.println("Fita1.Interval " + "child of " + i.getTask().getName()
         + "\t" + this.dateFormatter(i.getInitTime())
         + "\t" + "Final: " + this.dateFormatter(i.getEndTime()));*/
-    logger.info("Fita1.Interval " + "child of " + i.getTask().getName()
+    logger.info("Interval " + "child of " + i.getTask().getName()
         + "\t" + this.dateFormatter(i.getInitTime())
         + "\t" + "Final: " + this.dateFormatter(i.getEndTime()));
   }
@@ -79,7 +78,7 @@ public class Print implements Visitor {
           + "\t" + this.dateFormatter(p.getEndTime())
           + "\t" + "Duration: " + p.humanReadableFormat(p.getDuration()));
     } else {
-      logger.info("Fita1.Project: " + p.getName()
+      logger.info("Project: " + p.getName()
           + "\t" + "child of: " + p.getFather().getName()
           + "\t" + this.dateFormatter(p.getInitTime())
           + "\t" + this.dateFormatter(p.getEndTime())

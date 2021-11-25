@@ -31,7 +31,6 @@ public abstract class Event {
       father.addEvent(this);
     }
     tags = l;
-
   }
 
   //Getters
@@ -72,7 +71,7 @@ public abstract class Event {
     }
     assert invariant();
 
-    logger.debug("The start time of the Fita1.Event has been set to NOW");
+    logger.debug("The start time of the Event has been set to NOW");
   }
 
   public void setEndTime(LocalDateTime dateTime) {
@@ -83,7 +82,7 @@ public abstract class Event {
     }
     assert invariant();
 
-    logger.debug("The end time of the Fita1.Event has been set to NOW");
+    logger.debug("The end time of the Event has been set to NOW");
   }
 
   public void setDuration(Duration childrenDuration) {

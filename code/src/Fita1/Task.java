@@ -30,6 +30,7 @@ public class Task extends Event {
 
   protected void startTask() {
     taskIntervals.add(new Interval(this));
+    logger.debug("Task started. First interval assigned to the task");
   }
 
   @Override
@@ -44,6 +45,7 @@ public class Task extends Event {
       eventDuration = eventDuration.plus(taskIntervals.get(i).getDuration());
     }
     setDuration(eventDuration.plusSeconds(delay));
+    logger.debug("Task duration calculated with the durations of it's intervals");
   }
 
   protected void stopTask() {
@@ -53,7 +55,7 @@ public class Task extends Event {
     last.endInterval();
     this.setEndTime(last.getEndTime());
     this.setDuration(last.getDuration());
-    logger.debug("Fita1.Task finalized");
+    logger.debug("Task stopped");
   }
 
   public void acceptVisitor(Visitor visitor) {
