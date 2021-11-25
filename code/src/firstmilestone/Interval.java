@@ -21,28 +21,28 @@ public class Interval implements Observer {
 
   public Interval(Task t) {
     task = t;
+
+
     if (task.getInitTime() == null) {
       task.setInitTime(task.initTime);
     }
     Clock.getInstance().addObserver(this);
-    logger.debug("Interval created. From now on observes the clock. It's compulsory assigned to a task");
+    logger.debug("Interval created. Observes the clock. It's compulsory assigned to a task");
   }
 
   //The update() method it is called whenever the observable (clock) changes state.
   @Override
   public void update(Observable o, Object arg) {
 
-    LocalDateTime now = (LocalDateTime) arg;
 
+    LocalDateTime now = (LocalDateTime) arg;
     if (initTime == null) {
       initTime = now;
-
       task.setInitTime(initTime);
     }
-    //System.out.println("initTime " + initTime + "\nendTime " + endTime);
+
     endTime = now;
     duration = Duration.between(initTime, endTime);
-
 
     task.calculateDuration();
 
@@ -67,6 +67,8 @@ public class Interval implements Observer {
     return task;
   }
 
+
+  //If his Father task stops, the interval also stop.
   protected void endInterval() {
     endTime = LocalDateTime.now();
     duration = Duration.between(initTime, endTime);

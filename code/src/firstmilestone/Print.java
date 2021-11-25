@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+
+//Class that implements the Visitor pattern.
+//It prints the Information required in the Apendix B
 public class Print implements Visitor {
 
   private Event root;
@@ -18,6 +22,7 @@ public class Print implements Visitor {
 
   }
 
+  //Method for getting the Singleton Printer
   public static Print getInstance(Event rootF) {
     if (instance == null) {
       instance = new Print(rootF);
@@ -33,6 +38,7 @@ public class Print implements Visitor {
     root.acceptVisitor(this);
   }
 
+  //Method for showing the Date in a readable format.
   private String dateFormatter(LocalDateTime dt) {
     String formated;
     if (dt == null) {
@@ -55,9 +61,6 @@ public class Print implements Visitor {
 
   @Override
   public void visitInterval(Interval i) {
-    /*System.out.println("Fita1.Interval " + "child of " + i.getTask().getName()
-        + "\t" + this.dateFormatter(i.getInitTime())
-        + "\t" + "Final: " + this.dateFormatter(i.getEndTime()));*/
     logger.info("Interval " + "child of " + i.getTask().getName()
         + "\t" + this.dateFormatter(i.getInitTime())
         + "\t" + "Final: " + this.dateFormatter(i.getEndTime()));

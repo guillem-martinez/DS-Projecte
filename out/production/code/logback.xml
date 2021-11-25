@@ -47,14 +47,14 @@
         <file>log.html</file>
     </appender>
 
-    <logger name="firstmilestone" level="ON" />
-    <logger name="secondmilestone" level="ON" />
+    <logger name="firstmilestone" level="TRACE" />
+    <logger name="secondmilestone" level="TRACE" />
 
-    <root level="debug">
+    <root>
         <appender-ref ref="STDOUT" />
     </root>
 
-    <root level="debug">
+    <root>
         <appender-ref ref="FILE" />
     </root>
 

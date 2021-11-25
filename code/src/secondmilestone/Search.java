@@ -1,6 +1,10 @@
 package secondmilestone;
 
-import firstmilestone.*;
+import firstmilestone.Event;
+import firstmilestone.Interval;
+import firstmilestone.Project;
+import firstmilestone.Task;
+import firstmilestone.Visitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,15 +17,16 @@ public class Search implements Visitor {
   private Logger logger = LoggerFactory.getLogger(Search.class);
 
 
-
+  //The constructor requires a String that is the Tag that we are searching for.
   public Search(Event rootF, String required) {
     logger.trace("Instantiating a Search");
     root = rootF; //We save the father of the tree in the printer for recursive printer
     found = required;
-    rootF.acceptVisitor(this); //To start printing the tree by the root
     logger.debug("Searching Tasks or Projects with tag: " + found);
+    rootF.acceptVisitor(this); //To start printing the tree by the root
   }
 
+  //Method for getting the Singleton Searcher
   public static Search getInstance(Event rootF, String required) {
     if (instance == null) {
 

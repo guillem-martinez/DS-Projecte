@@ -9,17 +9,34 @@ import java.util.List;
 public class Task extends Event {
 
   public ArrayList<Interval> taskIntervals;
-//Related problems estan al MAIN
+
   public Task(String name, Event father, List<String> tags) {
     super(name, father, tags);
+
+    //Preconditions
+
+    assert taskIntervals == null : "taskIntervals list must be null";
+
     taskIntervals = new ArrayList<Interval>();
     logger.info("Task: " + name + " created successfully");
+
+    if(this.getFather() == null) {
+      logger.warn("The Task " + this.name +  " does not have a father");
+    }
+
+
+    //PostConditions
+
+    assert this.taskIntervals != null   : "taskIntervals list can not be null";
+    assert this.taskIntervals.isEmpty() : "taskIntervals list must be empty";
+
+
   }
 
   @Override
   protected boolean invariant() {
     super.invariant();
-    return (this.taskIntervals !=null && this.getFather() != null);
+    return (this.taskIntervals != null && this.getFather() != null);
 
   }
 
@@ -29,8 +46,24 @@ public class Task extends Event {
   }
 
   protected void startTask() {
+
+    //Preconditions
+
+    int sizeBeforeAdd = taskIntervals.size();
+
     taskIntervals.add(new Interval(this));
+
+    int sizeAfterAdd = taskIntervals.size();
+
+    assert invariant();
+
     logger.debug("Task started. First interval assigned to the task");
+
+    //Postconditions
+
+    assert sizeAfterAdd == sizeBeforeAdd + 1 : "Size of taskIntervals list has to grow by 1";
+
+
   }
 
   @Override
@@ -39,26 +72,53 @@ public class Task extends Event {
   //Calculates the durations of all his childs(Intervals)
   @Override
   protected void calculateDuration() {
+
+    //Preconditions
+    assert !this.taskIntervals.isEmpty() : "taskIntervals list can not be empty";
+
     eventDuration = Duration.ZERO;
     for (int i = 0; i < taskIntervals.size(); i++) {
 
       eventDuration = eventDuration.plus(taskIntervals.get(i).getDuration());
     }
+
+    assert invariant();
+
     setDuration(eventDuration.plusSeconds(delay));
     logger.debug("Task duration calculated with the durations of it's intervals");
+
+    //PostConditions
+
+    assert eventDuration.getSeconds() > 0 : "The durations calculated must be greater than 0";
+
+
+
   }
 
   protected void stopTask() {
+
+
+    //Precondition
+    assert !this.taskIntervals.isEmpty() : "taskIntervals list needs a minimum of 1 interval";
+
+
+    assert invariant();
+
     Interval last = taskIntervals != null && !taskIntervals.isEmpty()
         ? taskIntervals.get(taskIntervals.size() - 1) : null;
     assert last != null;
     last.endInterval();
+
     this.setEndTime(last.getEndTime());
     this.setDuration(last.getDuration());
     logger.debug("Task stopped");
   }
 
   public void acceptVisitor(Visitor visitor) {
+
+    //Preconditions
+
+    assert visitor != null : "Visitor given by parameter can not be null";
 
     assert invariant();
 

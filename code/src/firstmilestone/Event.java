@@ -62,6 +62,8 @@ public abstract class Event {
     name = n;
   }
 
+  //Setting the initTime of this event to LocalDateTime given by parameter.
+  //If this event has a father it spreads this initTime to him.
   public void setInitTime(LocalDateTime dateTime) {
     if (initTime == null) {
       initTime = dateTime;
@@ -75,6 +77,8 @@ public abstract class Event {
     logger.debug("The start time of the Event has been set to NOW");
   }
 
+  //Setting the endTime of this event to LocalDateTime given by parameter.
+  //If this event has a father it spreads this endTime to him.
   public void setEndTime(LocalDateTime dateTime) {
 
     endTime = dateTime;
@@ -86,6 +90,8 @@ public abstract class Event {
     logger.debug("The end time of the Event has been set to NOW");
   }
 
+  //Updates his own duration.
+  //If this event has a father it calls the method to calculate the new duration of its father
   public void setDuration(Duration childrenDuration) {
     eventDuration = childrenDuration;
     if (father != null) {
@@ -101,6 +107,7 @@ public abstract class Event {
 
   public abstract void acceptVisitor(Visitor visitor);
 
+  //Checks that duration is not negative
   protected boolean invariant() {
     return (this.getDuration().getSeconds() >= 0);
   }

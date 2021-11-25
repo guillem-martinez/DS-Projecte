@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 
 
-//This Fita1.Clock is the object Observable that the observers (intervals) will look at it.
-//It is implemented as Singleton for use the same instance of a Fita1.Clock for the entire program.
+//This Clock is the object Observable that the observers (intervals) will look at it.
+//It is implemented as Singleton for use the same instance of a Clock for the entire program.
 
 public class Clock extends Observable {
 
@@ -22,7 +22,7 @@ public class Clock extends Observable {
 
 
   //Getters
-  //Method for getting the Singleton Fita1.Clock
+  //Method for getting the Singleton Clock
   public static Clock getInstance() {
     if (instance == null) {
 
@@ -36,23 +36,24 @@ public class Clock extends Observable {
   }
 
 
-  //Private clock constructor
-  //Creates a TimerTask object that calls the tick() function inside.
+  //Creates a TimerTask object (repeatTask) that calls the tick() function inside.
+  //Object repeatTask defines the action that is going to be executed in his run() method.
+  //The run
   private Clock() {
     logger.trace("Instantiating a Clock ");
     timer = new Timer("Reloj");
     TimerTask repeatTask = new TimerTask() {
       @Override
       public void run() {
-        // System.out.println("COMENZAMOS EL RUN DEL RELOJ");
+
         tick();
-        //System.out.println(dateTime);
       }
     };
     //We set the period to 2 seconds
     long period = 2000;
     logger.trace("Setting the period to " + period / 1000 + " seconds.");
-    //Executes a task again and again every <period> time
+    //Executes a task again and again every <period> time.
+    //Delay can be added to the first execution.
     timer.scheduleAtFixedRate(repeatTask, 0, period);
   }
 
@@ -63,6 +64,8 @@ public class Clock extends Observable {
     instance.deleteObservers();
   }
 
+  //Simulates the tick of a real clock
+  //It changes the time to now and notify the observers.
   private void tick() {
     dateTime = LocalDateTime.now();
     setChanged();
