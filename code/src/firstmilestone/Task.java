@@ -1,4 +1,4 @@
-package Fita1;
+package firstmilestone;
 
 import java.time.Duration;
 import java.util.ArrayList;

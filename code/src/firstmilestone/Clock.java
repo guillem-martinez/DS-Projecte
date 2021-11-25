@@ -1,12 +1,12 @@
-package Fita1;
+package firstmilestone;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -36,7 +36,8 @@ public class Clock extends Observable {
   }
 
 
-  //Private clock constructor where it creates a TimerTask object that calls the tick() function inside.
+  //Private clock constructor
+  //Creates a TimerTask object that calls the tick() function inside.
   private Clock() {
     logger.trace("Instantiating a Clock ");
     timer = new Timer("Reloj");
@@ -50,15 +51,16 @@ public class Clock extends Observable {
     };
     //We set the period to 2 seconds
     long period = 2000;
-    logger.trace("Setting the period to " + period/1000 + " seconds.");
+    logger.trace("Setting the period to " + period / 1000 + " seconds.");
     //Executes a task again and again every <period> time
     timer.scheduleAtFixedRate(repeatTask, 0, period);
   }
 
   protected void stop() {
+    logger.debug("Stopping the clock");
+
     timer.cancel();
     instance.deleteObservers();
-    logger.debug("Stopping the clock");
   }
 
   private void tick() {

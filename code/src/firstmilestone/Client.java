@@ -1,18 +1,15 @@
-package Fita1;
-
-import Fita1.Clock;
-import Fita1.Project;
-import Fita1.Task;
-import Fita2.Search;
+package firstmilestone;
 
 import java.util.Arrays;
+import secondmilestone.Search;
+
 
 public class Client { //APENDIX A
 
   public static void main(String[] args) throws InterruptedException {
 
 
-/*
+    /*
     Fita1.Project root = new Fita1.Project("root", null);
     Fita1.Project swDesign = new Fita1.Project("software design", root);
     Fita1.Project swTesting = new Fita1.Project("Software testing", root);
@@ -24,18 +21,18 @@ public class Client { //APENDIX A
     Fita1.Task secondList = new Fita1.Task("Second List", problems);
     Fita1.Task read = new Fita1.Task("Read Handout", timeTracker);
     Fita1.Task firstMilestone = new Fita1.Task("First Milestone", timeTracker);
-*/
+    */
     Project root = new Project("root", null, null);
-    Project swDesign = new Project("software design", root, Arrays.asList("java","flutter"));
-    Project swTesting = new Project("Software testing", root, Arrays.asList("c++","Java","python"));
-    Project db = new Project("databases", root,Arrays.asList("SQL","python","C++"));
+    Project swDesign = new Project("software design", root, Arrays.asList("java", "flutter"));
+    Project swTesting = new Project("Software testing", root, Arrays.asList("c++", "Java", "python"));
+    Project db = new Project("databases", root, Arrays.asList("SQL", "python", "C++"));
     Task transportation = new Task("transportation", root, null);
     Project problems = new Project("problems", swDesign, null);
     Project timeTracker = new Project("TimeTracker", swDesign, null);
     Task read = new Task("Read Handout", timeTracker, null);
-    Task firstMilestone = new Task("First Milestone", timeTracker, Arrays.asList("Java","IntelliJ"));
-    final Task firstList = new Task("First List", problems,Arrays.asList("java"));
-    final Task secondList = new Task("Second List", problems,Arrays.asList("Dart"));
+    Task firstMilestone = new Task("First Milestone", timeTracker, Arrays.asList("Java", "IntelliJ"));
+    final Task firstList = new Task("First List", problems, Arrays.asList("java"));
+    final Task secondList = new Task("Second List", problems, Arrays.asList("Dart"));
 
 
     Search search = Search.getInstance(root, "java");

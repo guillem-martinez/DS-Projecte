@@ -1,4 +1,4 @@
-package Fita1;
+package firstmilestone;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -7,13 +7,13 @@ import java.util.List;
 
 
 //Composite element of Composite pattern that extends functionality of Fita1.Event
-public class Project extends Event{
+public class Project extends Event {
 
 
   private List<Event> events; //
 
 
-  public Project(String name, Event father, List<String> tags){
+  public Project(String name, Event father, List<String> tags) {
     super(name, father, tags);
     events = new ArrayList<Event>();
     logger.debug("Project: " + name + " created successfully");
@@ -28,30 +28,30 @@ public class Project extends Event{
   }
 
   //Getters
-  public List<Event> getEvents(){
+  public List<Event> getEvents() {
     return events;
   }
 
-  //Calculates the duration of all his childs (Fita1.Task/Projects with more childs or not) and Adds all the durations.
+  //Calculates the duration of all his childs
   @Override
   protected void calculateDuration() {
     eventDuration = Duration.ZERO;
-    for(int i=0; i<events.size(); i++){
+    for (int i = 0; i < events.size(); i++) {
       eventDuration = eventDuration.plus(events.get(i).getDuration());
     }
     setDuration(eventDuration.plusSeconds(delay));
   }
 
-  protected void addEvent(Event e){
+  protected void addEvent(Event e) {
     events.add(e);
   }
 
-  public void acceptVisitor(Visitor visitor){
+  public void acceptVisitor(Visitor visitor) {
 
     assert invariant();
 
     visitor.visitProject(this);
-    for(int i=0; i<events.size(); i++){
+    for (int i = 0; i < events.size(); i++) {
       events.get(i).acceptVisitor(visitor);
     }
   }

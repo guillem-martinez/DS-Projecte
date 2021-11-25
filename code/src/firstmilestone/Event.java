@@ -1,12 +1,11 @@
-package Fita1;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package firstmilestone;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -38,7 +37,9 @@ public abstract class Event {
     return name;
   }
 
-  public List<String> getTags(){return tags; }
+  public List<String> getTags() {
+    return tags;
+  }
 
   public LocalDateTime getInitTime() {
     return initTime;
@@ -100,7 +101,7 @@ public abstract class Event {
 
   public abstract void acceptVisitor(Visitor visitor);
 
-  protected boolean invariant(){
+  protected boolean invariant() {
     return (this.getDuration().getSeconds() >= 0);
   }
 

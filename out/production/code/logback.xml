@@ -47,8 +47,8 @@
         <file>log.html</file>
     </appender>
 
-    <logger name="fita1" level="ON" />
-    <logger name="fita2" level="ON" />
+    <logger name="firstmilestone" level="ON" />
+    <logger name="secondmilestone" level="ON" />
 
     <root level="debug">
         <appender-ref ref="STDOUT" />

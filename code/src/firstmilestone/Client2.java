@@ -1,9 +1,4 @@
-package Fita1;
-
-import Fita1.Clock;
-import Fita1.Print;
-import Fita1.Project;
-import Fita1.Task;
+package firstmilestone;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package Fita1;
+package firstmilestone;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -46,12 +46,6 @@ public class Print implements Visitor {
 
   @Override
   public void visitTask(Task t) {
-/*
-    System.out.println("Fita1.Task: " + t.getName()
-        + "\t" + "child of " + t.getFather().getName()
-        + "\t" + this.dateFormatter(t.getInitTime())
-        + "\t" + this.dateFormatter(t.getEndTime())
-        + "\t" + "Duration: " + t.humanReadableFormat(t.getDuration()));*/
     logger.info("Task: " + t.getName()
         + "\t" + "child of " + t.getFather().getName()
         + "\t" + this.dateFormatter(t.getInitTime())
