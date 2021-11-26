@@ -1,0 +1,11 @@
+INFORME MILESTONE 2 TIME_TRACKER
+
+La segunda entrega del proyecto ha sido, al igual que la primera, desarrollada de forma conjunta entre todos los integrantes del grupo.
+Como en la primera entrega aun así, cada integrante del grupo se ha focalizado más en un ámbito.
+Pau y Biel se han centrado en nutrir al código de buenos comentarios, que aporten claridad y entendimiento resultando en un código completo y más fácil de usar y mantener.
+Cristian se ha focalizado en la parte del Search by Tag.
+Guillem se ha centrado en corregir los errores de estilo del checkstyle y los logs.
+La parte del Design By Contract ha sido realizada mediante Code with Me y todos los integrantes del grupo a la vez para definir con la mayor exactitud posible los invariants, las precondiciones y las postcondiciones.
+Pensamos que al hacerlo todos a la vez se ponía en común la visión de cada integrante sobre las condiciones que debía cumplir cada método, facilitando así la aparición de nuevas ideas. Un estilo parecido a un Brainstorming.
+
+Aun así, queremos recalcar que todos hemos ayudado en mayor o menor medida en todos los apartados de la entrega para poder integrar todos los conocimientos de cada parte.
