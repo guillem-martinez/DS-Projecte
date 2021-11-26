@@ -6,7 +6,7 @@ import java.util.List;
 
 
 
-//Composite element of Composite pattern that extends functionality of Fita1.Event
+//Composite element of Composite pattern that extends functionality of Event
 public class Project extends Event {
 
 
@@ -48,7 +48,7 @@ public class Project extends Event {
     return events;
   }
 
-  //Calculates the duration of all his childs
+  //Calculates the duration of all his childs(Projects or Tasks)
   @Override
   protected void calculateDuration() {
 
@@ -56,12 +56,13 @@ public class Project extends Event {
     assert !this.events.isEmpty() : "Events list (Children) can not be empty";
 
     eventDuration = Duration.ZERO;
+    //Duration is the sum of all its childs durations.
     for (int i = 0; i < events.size(); i++) {
       eventDuration = eventDuration.plus(events.get(i).getDuration());
     }
 
     assert invariant();
-
+    //Delay(2s) added as it's specified in the project conditions
     setDuration(eventDuration.plusSeconds(delay));
 
     //PostConditions
@@ -99,6 +100,7 @@ public class Project extends Event {
     assert invariant();
 
     visitor.visitProject(this);
+    //Visiting all its childs(Projects or Tasks)
     for (int i = 0; i < events.size(); i++) {
       events.get(i).acceptVisitor(visitor);
     }

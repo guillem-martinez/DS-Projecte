@@ -20,7 +20,7 @@ public class Task extends Event {
     taskIntervals = new ArrayList<Interval>();
     logger.info("Task: " + name + " created successfully");
 
-    if(this.getFather() == null) {
+    if (this.getFather() == null) {
       logger.warn("The Task " + this.name +  " does not have a father");
     }
 
@@ -49,7 +49,7 @@ public class Task extends Event {
 
     //Preconditions
 
-    int sizeBeforeAdd = taskIntervals.size();
+    final int sizeBeforeAdd = taskIntervals.size();
 
     taskIntervals.add(new Interval(this));
 
@@ -103,9 +103,10 @@ public class Task extends Event {
 
 
     assert invariant();
+    //Last Interval of its list is ended
 
     Interval last = taskIntervals != null && !taskIntervals.isEmpty()
-        ? taskIntervals.get(taskIntervals.size() - 1) : null;
+        ? taskIntervals.get(taskIntervals.size() - 1) : null; //last = last element of listIntervals
     assert last != null;
     last.endInterval();
 
@@ -123,6 +124,7 @@ public class Task extends Event {
     assert invariant();
 
     visitor.visitTask(this);
+    //Visiting all its childs(Intervals)
     for (int i = 0; i < taskIntervals.size(); i++) {
       taskIntervals.get(i).acceptVisitor(visitor);
     }

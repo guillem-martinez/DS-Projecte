@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public abstract class Event {
 
 
-  protected static final int delay = 2;
+  protected static final int delay = 2; //Time specified in the project conditions
   protected String name;
   private Event father;
   protected LocalDateTime initTime;
