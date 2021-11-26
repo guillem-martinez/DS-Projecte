@@ -47,7 +47,7 @@
         <file>log.html</file>
     </appender>
 
-    <logger name="firstmilestone" level="TRACE" />
+    <logger name="firstmilestone" level="OFF" />
     <logger name="secondmilestone" level="TRACE" />
 
     <root>

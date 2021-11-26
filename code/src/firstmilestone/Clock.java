@@ -38,7 +38,8 @@ public class Clock extends Observable {
 
   //Creates a TimerTask object (repeatTask) that calls the tick() function inside.
   //Object repeatTask defines the action that is going to be executed in his run() method.
-  //The run
+  //The run method is executed every time repeatTask is called
+  //RepeatTask is called every time scheduleAtFixedRate is executed
   private Clock() {
     logger.trace("Instantiating a Clock ");
     timer = new Timer("Reloj");

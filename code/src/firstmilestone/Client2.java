@@ -1,5 +1,7 @@
 package firstmilestone;
 
+import secondmilestone.Search;
+
 import java.util.Arrays;
 
 public class Client2 {
@@ -22,6 +24,7 @@ public class Client2 {
     final Task secondList = new Task("Second List", problems, Arrays.asList("Dart"));
 
     //Creating the Printer for showing the information of the tree (Milestone1)
+    Search search = Search.getInstance(root, "java");
     Print treePrinter = Print.getInstance(root);
     final Clock clock = Clock.getInstance();
 
