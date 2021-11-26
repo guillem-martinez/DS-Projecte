@@ -40,7 +40,7 @@ public class Search implements Visitor {
 
     if (p.getTags() != null) {
       for (String iterator : p.getTags()) {
-        if (iterator == this.found) {
+        if (iterator.equalsIgnoreCase(this.found)) {
           logger.info("Project " + p.getName() + " has Tag: " + this.found);
         }
 
@@ -54,7 +54,7 @@ public class Search implements Visitor {
 
     if (t.getTags() != null) {
       for (String iterator : t.getTags()) {
-        if (iterator == this.found) {
+        if (iterator.equalsIgnoreCase(this.found)) {
           logger.info("Task " + t.getName() + " has Tag: " + this.found);
         }
       }

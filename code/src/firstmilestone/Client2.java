@@ -1,8 +1,7 @@
 package firstmilestone;
 
-import secondmilestone.Search;
-
 import java.util.Arrays;
+import secondmilestone.Search;
 
 public class Client2 {
 

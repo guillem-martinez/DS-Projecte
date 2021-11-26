@@ -26,7 +26,7 @@ public class Client { //APENDIX A
     final Task secondList = new Task("Second List", problems, Arrays.asList("Dart"));
 
     //Searching the tag <example> in the Tree and showing it in Console
-    Search search = Search.getInstance(root, "java");
+    Search search = Search.getInstance(root, "dart");
     Clock clock = Clock.getInstance();
 
 
