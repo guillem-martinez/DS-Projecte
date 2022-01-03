@@ -13,8 +13,8 @@ public class Project extends Event {
   private List<Event> events; //
 
 
-  public Project(String name, Event father, List<String> tags) {
-    super(name, father, tags);
+  public Project(int id, String name, Event father, List<String> tags) {
+    super(id, name, father, tags);
 
     //Preconditions
     assert this.events == null : "Event list (Children) must be null";

@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Observer;
+
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,10 +20,11 @@ public class Interval implements Observer {
   private Duration duration;
   private Task task;
   private Logger logger = LoggerFactory.getLogger(Interval.class);
+  private JSONObject jsonInterval;
 
   public Interval(Task t) {
     task = t;
-
+    jsonInterval = new JSONObject();
 
     if (task.getInitTime() == null) {
       task.setInitTime(task.initTime);
@@ -67,6 +70,8 @@ public class Interval implements Observer {
     return task;
   }
 
+  public JSONObject getJsonInterval() { return jsonInterval; }
+
 
   //If his Father task stops, the interval also stop.
   protected void endInterval() {
@@ -80,5 +85,16 @@ public class Interval implements Observer {
   public void acceptVisitor(Visitor visitor) {
     visitor.visitInterval(this);
   }
+  /*
+  public JSONObject jsonFormat(){
+    JSONObject j = new JSONObject();
 
+    j.put("initTime", initTime);
+    j.put("endTime", endTime);
+    //Duration??
+
+    return j;
+
+  }
+*/
 }

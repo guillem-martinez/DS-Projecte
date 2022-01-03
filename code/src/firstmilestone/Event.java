@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,12 +22,16 @@ public abstract class Event {
   protected LocalDateTime endTime;
   protected Duration eventDuration;
   protected List<String> tags;
+  protected int id;
+  protected JSONObject json;
   protected Logger logger = LoggerFactory.getLogger(Event.class);
 
-  public Event(String n, Event f, List<String> l) {
+  public Event(int identifier, String n, Event f, List<String> l) {
     name = n;
     father = f;
     eventDuration = Duration.ZERO;
+    id = identifier;
+    json = new JSONObject();
     if (father != null) {
       father.addEvent(this);
     }
@@ -57,6 +63,9 @@ public abstract class Event {
     return eventDuration;
   }
 
+  public JSONObject getJson() { return json; }
+
+  public int getId(){ return id; }
   //Setters
   public void setName(String n) {
     name = n;

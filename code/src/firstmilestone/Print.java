@@ -39,7 +39,7 @@ public class Print implements Visitor {
   }
 
   //Method for showing the Date in a readable format.
-  private String dateFormatter(LocalDateTime dt) {
+  public String dateFormatter(LocalDateTime dt) {
     String formated;
     if (dt == null) {
       formated = "null";

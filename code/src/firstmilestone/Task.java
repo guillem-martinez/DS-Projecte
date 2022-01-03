@@ -10,8 +10,8 @@ public class Task extends Event {
 
   public ArrayList<Interval> taskIntervals;
 
-  public Task(String name, Event father, List<String> tags) {
-    super(name, father, tags);
+  public Task(int id, String name, Event father, List<String> tags) {
+    super(id, name, father, tags);
 
     //Preconditions
 
