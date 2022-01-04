@@ -21,6 +21,10 @@ public class Json {
     JSONTokener reader = new JSONTokener(jsonFile);
     JSONObject obj = new JSONObject(reader);
     jsonFile.close();
-    
+
+  }
+
+  public void generateTree(){
+
   }
 }

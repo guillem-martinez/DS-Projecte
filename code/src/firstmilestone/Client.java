@@ -1,12 +1,13 @@
 package firstmilestone;
 
+import java.io.IOException;
 import java.util.Arrays;
 import secondmilestone.Search;
 
 
 public class Client { //APENDIX A
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) throws InterruptedException, IOException {
 
 
     //Creating the tree of tasks and projects with the information of Apendix A
@@ -25,6 +26,8 @@ public class Client { //APENDIX A
     final Task firstList = new Task(10,"First List", problems, Arrays.asList("java"));
     final Task secondList = new Task(11,"Second List", problems, Arrays.asList("Dart"));
 
+    Json saver = new Json();
+    saver.storeInfo(root,"test");
     //Searching the tag <example> in the Tree and showing it in Console
     Search search = Search.getInstance(root, "dart");
     Clock clock = Clock.getInstance();
