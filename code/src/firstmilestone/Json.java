@@ -12,11 +12,14 @@ public class Json {
 
 
   public void storeInfo(Event e, String file) throws IOException {
-    Visitor jsonVisitor = new JsonVisitor();
+    JsonVisitor jsonVisitor = new JsonVisitor();
     e.acceptVisitor(jsonVisitor);
 
     FileWriter jsonFile = new FileWriter("./" + file, false);
-    jsonFile.write(e.getJson().toString());
+    //jsonFile.write(e.getJson().toString());
+    jsonFile.write(jsonVisitor.getFather().toString());
+
+
     jsonFile.close();
   }
 
