@@ -1,22 +1,26 @@
 package firstmilestone;
-import org.json.*;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import org.json.*;
+
 
 public class Json {
 
+  private Event root;
+
+
   public void storeInfo(Event e, String file) throws IOException {
-    JsonVisitor jsonVisitor = new JsonVisitor();
+    Visitor jsonVisitor = new JsonVisitor();
     e.acceptVisitor(jsonVisitor);
 
-    FileWriter jsonFile = new FileWriter("./"+file,false);
+    FileWriter jsonFile = new FileWriter("./" + file, false);
     jsonFile.write(e.getJson().toString());
     jsonFile.close();
   }
 
-  public void loadInfo(String file) throws IOException{
+  public void loadInfo(String file) throws IOException {
     FileReader jsonFile = new FileReader(file);
     JSONTokener reader = new JSONTokener(jsonFile);
     JSONObject obj = new JSONObject(reader);

@@ -1,11 +1,12 @@
 package firstmilestone;
 
+import java.io.IOException;
 import java.util.Arrays;
 import secondmilestone.Search;
 
 public class Client2 {
 
-  public static void main(String[] args) throws InterruptedException { //APENDIX B
+  public static void main(String[] args) throws InterruptedException, IOException { //APENDIX B
 
     //Creating the tree of tasks and projects with the information of Apendix B
     Project root = new Project(1,"root", null, null);
@@ -52,6 +53,9 @@ public class Client2 {
     transportation.stopTask();
 
     clock.stop();
+
+    //Json json = new Json();
+    //json.storeInfo(root, "test2");
 
 
 

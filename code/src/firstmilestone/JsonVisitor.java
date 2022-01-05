@@ -17,6 +17,7 @@ public class JsonVisitor implements Visitor {
     t.getJson().put("endTime", t.getEndTime());
     t.getJson().put("duration", t.humanReadableFormat(t.getDuration()).substring(0,
         t.humanReadableFormat(t.getDuration()).length() - 1));
+    //hacer el write
   }
 
   @Override

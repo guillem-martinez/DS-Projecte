@@ -67,9 +67,6 @@ public abstract class Event {
 
   public int getId(){ return id; }
   //Setters
-  public void setName(String n) {
-    name = n;
-  }
 
   //Setting the initTime of this event to LocalDateTime given by parameter.
   //If this event has a father it spreads this initTime to him.
