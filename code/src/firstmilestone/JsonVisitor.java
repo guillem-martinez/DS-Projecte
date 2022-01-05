@@ -20,6 +20,10 @@ public class JsonVisitor implements Visitor {
     return this.father;
   }
 
+  public JSONArray getChildren(){
+    return this.childs;
+  }
+
   @Override
   public void visitInterval(Interval i) {
     i.getJsonInterval().put("initTime", i.getInitTime());
@@ -40,6 +44,7 @@ public class JsonVisitor implements Visitor {
     t.getJson().put("duration", t.humanReadableFormat(t.getDuration()).substring(0,
         t.humanReadableFormat(t.getDuration()).length() - 1));
     t.getJson().put("parent", t.getFather().getName());
+    t.getJson().put("tags", t.getTags());
     //hacer el write
 
     /*
@@ -84,6 +89,7 @@ public class JsonVisitor implements Visitor {
         p.humanReadableFormat(p.getDuration()).length() - 1));
     if(p.getFather() !=null){
       p.getJson().put("parent", p.getFather().getName());
+      p.getJson().put("tags", p.getTags());
     }
 
     JSONArray children = new JSONArray();
@@ -107,11 +113,12 @@ public class JsonVisitor implements Visitor {
       }
     //}
 
+    p.getJson().put("children", children);
     for(Integer it : iWithParent){
       this.childs.remove(it);
     }
 
-    p.getJson().put("children", children);
+
 
     if(p.getFather() == null){
       this.father = p.getJson();

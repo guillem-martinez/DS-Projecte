@@ -54,8 +54,8 @@ public class Client2 {
 
     clock.stop();
 
-    //Json json = new Json();
-    //json.storeInfo(root, "test2");
+    Json saver = new Json();
+    saver.storeInfo(root, "client2");
 
 
 

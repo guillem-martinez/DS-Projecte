@@ -1,1 +1,21 @@
 {"duration":"0","children":[],"name":"root","id":1}
+
+    [{"duration":"0","parent":"root","children":[],"name":"software design","id":2},
+
+        {"duration":"0","parent":"software design","children":[],"name":"problems","id":6},
+
+            {"duration":"0","parent":"problems","intervals":[],"name":"First List","id":10},
+
+            {"duration":"0","parent":"problems","intervals":[],"name":"Second List","id":11},
+
+        {"duration":"0","parent":"software design","children":[],"name":"TimeTracker","id":7},
+
+            {"duration":"0","parent":"TimeTracker","intervals":[],"name":"Read Handout","id":8},
+
+            {"duration":"0","parent":"TimeTracker","intervals":[],"name":"First Milestone","id":9},
+
+    {"duration":"0","parent":"root","children":[],"name":"Software testing","id":3},
+
+    {"duration":"0","parent":"root","children":[],"name":"databases","id":4},
+
+    {"duration":"0","parent":"root","intervals":[],"name":"transportation","id":5}]

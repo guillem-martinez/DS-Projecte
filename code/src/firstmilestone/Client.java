@@ -27,7 +27,7 @@ public class Client { //APENDIX A
     final Task secondList = new Task(11,"Second List", problems, Arrays.asList("Dart"));
 
     Json saver = new Json();
-    saver.storeInfo(root,"test3");
+    saver.storeInfo(root,"client");
     //Searching the tag <example> in the Tree and showing it in Console
     //Search search = Search.getInstance(root, "dart"); DESCOMENTAAAAAR
     Clock clock = Clock.getInstance();

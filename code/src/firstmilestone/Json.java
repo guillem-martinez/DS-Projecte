@@ -18,6 +18,7 @@ public class Json {
     FileWriter jsonFile = new FileWriter("./" + file, false);
     //jsonFile.write(e.getJson().toString());
     jsonFile.write(jsonVisitor.getFather().toString());
+    jsonFile.write(jsonVisitor.getChildren().toString());
 
 
     jsonFile.close();
