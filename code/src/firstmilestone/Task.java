@@ -1,5 +1,6 @@
 package firstmilestone;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.Duration;
@@ -12,6 +13,8 @@ public class Task extends Event {
 
   public ArrayList<Interval> taskIntervals;
 
+  private boolean active;
+
   public Task(int id, String name, Event father, List<String> tags) {
     super(id, name, father, tags);
 
@@ -21,6 +24,7 @@ public class Task extends Event {
 
     taskIntervals = new ArrayList<Interval>();
     logger.info("Task: " + name + " created successfully");
+    this.active = false;
 
     if (this.getFather() == null) {
       logger.warn("The Task " + this.name +  " does not have a father");
@@ -54,6 +58,8 @@ public class Task extends Event {
     final int sizeBeforeAdd = taskIntervals.size();
 
     taskIntervals.add(new Interval(this));
+
+    this.active = true;
 
     int sizeAfterAdd = taskIntervals.size();
 
@@ -114,6 +120,8 @@ public class Task extends Event {
 
     this.setEndTime(last.getEndTime());
     this.setDuration(last.getDuration());
+    this.active = false;
+
     logger.debug("Task stopped");
   }
 
@@ -147,11 +155,24 @@ public class Task extends Event {
     json.put("name", this.name);
     json.put("initTime", this.initTime);
     json.put("endTime", this.endTime);
-    json.put("duration", this.humanReadableFormat(this.eventDuration).substring(0,
+    /*json.put("duration", this.humanReadableFormat(this.eventDuration).substring(0,
         this.humanReadableFormat(this.getDuration()).length() - 1));
+
+     */
+    json.put("duration",this.getDuration().toSeconds());
     json.put("class", this.getClass().getName().substring(15));
     json.put("parent", this.father.getName());
     json.put("tags", this.tags);
+    json.put("active", this.active);
+    JSONArray intervals = new JSONArray();
+
+    if(depth > 0) {
+      for(int i = 0; i < this.getTaskIntervals().size(); i++) {
+        JSONObject child = this.getTaskIntervals().get(i).toJson(depth - 1);
+        intervals.put(child);
+      }
+      }
+      json.put("intervals", intervals);
 
 
     return json;

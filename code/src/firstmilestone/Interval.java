@@ -86,7 +86,7 @@ public class Interval implements Observer {
     visitor.visitInterval(this);
   }
 
-  public JSONObject toJson(){
+  public JSONObject toJson(int i){
     JSONObject j = new JSONObject();
 
     j.put("initTime", initTime);

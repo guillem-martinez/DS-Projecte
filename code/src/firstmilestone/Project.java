@@ -137,8 +137,11 @@ public class Project extends Event {
     json.put("name", this.name);
     json.put("initTime", this.initTime);
     json.put("endTime", this.endTime);
-    json.put("duration", this.humanReadableFormat(this.eventDuration).substring(0,
+    /*json.put("duration", this.humanReadableFormat(this.eventDuration).substring(0,
         this.humanReadableFormat(this.getDuration()).length() - 1));
+        */
+
+    json.put("duration", this.getDuration().toSeconds());
     json.put("class", this.getClass().getName().substring(15));
 
     if(this.getFather() !=null) {
