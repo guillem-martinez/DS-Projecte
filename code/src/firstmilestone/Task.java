@@ -1,5 +1,7 @@
 package firstmilestone;
 
+import org.json.JSONObject;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ public class Task extends Event {
     return taskIntervals;
   }
 
-  protected void startTask() {
+  public void startTask() {
 
     //Preconditions
 
@@ -95,7 +97,7 @@ public class Task extends Event {
 
   }
 
-  protected void stopTask() {
+  public void stopTask() {
 
 
     //Precondition
@@ -130,6 +132,28 @@ public class Task extends Event {
     }
   }
 
+  @Override
+  public Event findActivityById(int id) {
+    if (this.id == id) {
+      return this;
+    } else {
+      return null;
+    }
+  }
+
+  @Override
+  public JSONObject toJson(int depth) {
+    json.put("id", this.id);
+    json.put("name", this.name);
+    json.put("initTime", this.initTime);
+    json.put("endTime", this.endTime);
+    json.put("duration", this.humanReadableFormat(this.eventDuration).substring(0,
+        this.humanReadableFormat(this.getDuration()).length() - 1));
+    json.put("class", this.getClass().getName().substring(15));
+    json.put("parent", this.father.getName());
+    json.put("tags", this.tags);
 
 
+    return json;
+  }
 }

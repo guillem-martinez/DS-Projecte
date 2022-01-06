@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 
 
 //Component Class of the Composite pattern
-public abstract class Event {
+public abstract class  Event {
 
 
   protected static final int delay = 2; //Time specified in the project conditions
   protected String name;
-  private Event father;
+  protected Event father;
   protected LocalDateTime initTime;
   protected LocalDateTime endTime;
   protected Duration eventDuration;
@@ -123,5 +123,9 @@ public abstract class Event {
     duration = duration.truncatedTo(ChronoUnit.SECONDS);
     return duration.toString().substring(2).replaceAll("(\\d[HMS])(?!$)", "$1 ").toLowerCase();
   }
+
+  public abstract Event findActivityById(int id);
+
+  public abstract JSONObject toJson(int depth);
 
 }

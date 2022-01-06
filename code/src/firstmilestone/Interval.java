@@ -85,16 +85,17 @@ public class Interval implements Observer {
   public void acceptVisitor(Visitor visitor) {
     visitor.visitInterval(this);
   }
-  /*
-  public JSONObject jsonFormat(){
+
+  public JSONObject toJson(){
     JSONObject j = new JSONObject();
 
     j.put("initTime", initTime);
     j.put("endTime", endTime);
-    //Duration??
+    j.put("duration", duration.getSeconds());
+    j.put("class", this.getClass().getName().substring(15));
 
     return j;
 
   }
-*/
+
 }

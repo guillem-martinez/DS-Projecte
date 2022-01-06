@@ -37,6 +37,7 @@ public class JsonVisitor implements Visitor {
 
   @Override
   public void visitTask(Task t) {
+    t.getJson().put("class", t.getClass().getName().substring(15));
     t.getJson().put("name", t.getName());
     t.getJson().put("id", t.getId());
     t.getJson().put("initTime", t.getInitTime());
@@ -80,7 +81,7 @@ public class JsonVisitor implements Visitor {
 
   @Override
   public void visitProject(Project p) {
-
+    p.getJson().put("class",p.getClass().getName().substring(15));
     p.getJson().put("name", p.getName());
     p.getJson().put("id", p.getId());
     p.getJson().put("initTime", p.getInitTime());

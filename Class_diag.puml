@@ -4,57 +4,72 @@
 
 class Project{
 - events : List<Event>
-+ Project(name: String, father: Event)
++ Project(id, name: String, father: Event, tags: List<String> )
+# invariant(): boolean
 + getEvents(): List<Event>
-# calculateDuration()
-# addEvent(e : Event)
-+ acceptVisitor(visitor : Visitor)
+# //calculateDuration() : void//
+# //addEvent(e : Event) : void//
++ //acceptVisitor(visitor : Visitor) : void//
++ findActivityById(id : int) : Event
++ toJson(depth : int) : JSONObject
 }
 
 class Task{
 - task_intervals : ArrayList<Interval>
-+ Task(name: String, father: Event)
-+ getTask_intervals() : ArrayList<interval>
-# addEvent(event : Event)
-# startTask()
-# calculateDuration()
-# stopTask()
-+ acceptVisitor(visitor : Visitor)
++ Task(id, name: String, father: Event, tags : List<String>)
+# invariant(): boolean
++ getTaskIntervals() : ArrayList<interval>
+# //startTask() : void//
+# //addEvent(event : Event) : void//
+# //calculateDuration() : void//
+# //stopTask() : void//
++ //acceptVisitor(visitor : Visitor) : void//
++ findActivityById(id : int) : Event
++ toJson(depth : int) : JSONObject
 }
 
 abstract Event{
+# {static} delay : int = 2{readOnly}
 # name : String
+- father : Event
 # initTime : LocalDateTime
 # endTime : LocalDateTime
 # event_duration : Duration
 # tags : list<String>
-- father : Event
-+ Event(n : String, f: Event)
-+ setName(n : String)
-+ setInitTime(dateTime: LocalDateTime)
-+ setEndTime(dateTime: LocalDateTime)
-+ setDuration(childrenDuration: Duration)
+# id : int
+# json : JSONObject
+# logger : Logger
++ Event(identifier, n : String, f: Event, l : List<String>)
 + getName() : String
++ getTags() : List<String>
 + getInitTime() : LocalDateTime
 + getEndTime() : LocalDateTime
 + getFather() : Event
 + getDuration() : Duration
-# //addEvent(event : Event)//
-+ //calculateDuration()//
-+ //acceptVisitor(visitor : Visitor)//
-# //humanReadableFormat(duration: Duration) : String//
++ getJson() : JSONObject
++ getId() : int
++ //setInitTime(dateTime: LocalDateTime) : void//
++ //setEndTime(dateTime: LocalDateTime) : void//
++ //setDuration(childrenDuration: Duration) : void//
+# //addEvent(event : Event) : void//
++ //calculateDuration() : void//
++ //acceptVisitor(visitor : Visitor) : void//
+# invariant : boolean
+# humanReadableFormat(duration: Duration) : String
++ //findActivityById(id : int) : Event//
++ //toJson(depth : int) : JSONObject//
 }
 
 class Clock{
-- timer : Timer
-- dateTime : LocalDateTime
-- instance : Clock
-- Clock()
-+ //getInstance() : Clock//
-+ getDateTime() : LocalDateTime
-# stop()
-- //tick()//
-+ //notifyObservers()//
+- {static} dateTime : LocalDateTime
+- {static} timer : Timer
+- {static} instance : Clock
+- logger : Logger
++ {static} getInstance() : Clock
+- Clock
+# //stop() : void//
+- //tick() : void//
++ //notifyObservers(arg : Object) : void//
 }
 
 class Interval{
@@ -62,32 +77,35 @@ class Interval{
 - endTime : DateTime
 - duration : Duration /'cada golpe de reloj incremento'/
 - task : Task
+- logger : Logger
+- jsonInterval : JSONObject
 + Interval(t : Task)
-+ update(o: Observable, arg: Object)
-+ getTask() : Task
 + getInitTime() : LocalDateTime
 + getEndTime() : LocalDateTime
 + getDuration() : Duration
-# endInterval()
-+ acceptVisitor(visitor : Visitor)
++ getTask() : Task
++ getJsonInterval() : JSONObject
+# //endInterval() : void//
++ //acceptVisitor(visitor : Visitor) : void//
 }
 
 interface Visitor{
-+ visitTask(t : Task)
-+ visitProject(p : Project)
-+ visitInterval(i : Interval)
++ //visitTask(t : Task) : void//
++ //visitProject(p : Project) : void//
++ //visitInterval(i : Interval) : void//
 }
 
 class Print{
 - root : Event
-- //instance : Print//
+- {static}instance : Print
+- logger : Logger
 + Print(rootF: Event)
-+ //getInstance(rootF: Event) : Print//
-+ printerInterval()
++ {static}getInstance(rootF: Event) : Print
++ //printerInterval() : void//
 - DateFormatter(dt: LocalDateTime) : String
-+ visitTask(t : Task)
-+ visitInterval(i : Interval)
-+ visitProject(p : Project)
++ //visitTask(t : Task) : void//
++ //visitInterval(i : Interval) : void//
++ //visitProject(p : Project) : void//
 }
 
 package "java.utils"{
@@ -105,7 +123,68 @@ abstract Observable{
 
 
 class Client{
-//void main()//
+//main() : void//
+}
+
+
+class Search{
+- root : Event
+- {static} instance : Search
+- found : String
+- logger : Logger
++ Search(rootF : Event, required : String)
++ {static} getInstance(rootF : Event, required: String) : Search
++ //visitProject(p : Project) : void//
++ //visitTask(t : Task) : void//
++ //visitInterval(i : Interval) : void//
+}
+
+class Json{
+- root : Event
++ //storeInfo(e : Event, file : String) : void//
++ //loadInfo(file : String) : void//
++ //generateTree() : void//
+}
+
+
+class JsonVisitor{
+- father : JSONObject
+- childs : JSONArray
+- intervals : JSONArray
++ JsonVisitor()
++ getFather() : JSONObject
++ getChildren() : JSONArray
++ //visitInterval(i : Interval) : void//
++ //visitTask(t : Task) : void//
++ //visitProject(p : Project) : void//
+}
+
+package "webserver"{
+class WebServer{
+- {static} PORT : int = 8080{readOnly}
+- currentEvent : Event
+- root : Event{readOnly}
++ WebServer(root : Event)
+- findActivityByID(id : int) : Event
+
+
+
+
+- class SocketThread{
+- insocked : Socket{readOnly}
++ //run() : void//
+- makeBodyAnswer(tokens : String[]) : String
+- makeHeaderAnswer : String
+}
+
+
+
+class MainWebServer{
++ //{static} main(args : String[]) : void//
++ //{static} webServer() : void//
++ {static} makeTreeCourses() : Event
+}
+
 }
 
 Event <|-- Task
@@ -118,19 +197,8 @@ Interval "0..*" --*  "1" Task
 Event <-- Client
 Visitor <-- Client
 Print --|> Visitor
-
-class Search{
-- root : Event
-- //instance : Search//
-+ Search(rootF: Event)
-+ //getInstance(rootF: Event) : Search//
-+ printerInterval()
-- DateFormatter(dt: LocalDateTime) : String
-+ visitTask(t : Task)
-+ visitInterval(i : Interval)
-+ visitProject(p : Project)
-}
-
-
+Search --|> Visitor
+JsonVisitor --|> Visitor
+WebServer --> MainWebServer
 
 @enduml

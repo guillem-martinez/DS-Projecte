@@ -27,7 +27,7 @@ public class Json {
   public void loadInfo(String file) throws IOException {
     FileReader jsonFile = new FileReader(file);
     JSONTokener reader = new JSONTokener(jsonFile);
-    JSONObject obj = new JSONObject(reader);
+    JSONObject jsonObject = new JSONObject(reader);
     jsonFile.close();
 
   }
