@@ -137,7 +137,7 @@ public class WebServer {
           break;
         }
         case "addEvent": {
-          System.out.println("ADD EVENT ");
+          //System.out.println("ADD EVENT ");
           int id = Integer.parseInt(tokens[1]);
           Project father = (Project) findActivityById(id);
           Boolean isProject = Boolean.parseBoolean(tokens[2]);
@@ -147,12 +147,11 @@ public class WebServer {
 
           if(isProject == true) {
             Project project = new Project(placeholderId+1, name, father, tags);
-            System.out.println("PROYECTO CREADO");
             //father.addEvent(project);
           }
           else {
             Task task = new Task(placeholderId+1, name, father, tags);
-            System.out.println("TASCA CREADA");
+            //System.out.println("TASCA CREADA");
             //father.addEvent(task);
           }
           placeholderId++;
