@@ -1,10 +1,10 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-
+package "firstmilestone"{
 class Project{
 - events : List<Event>
-+ Project(id, name: String, father: Event, tags: List<String> )
++ Project(id: int, name: String, father: Event, tags: List<String> )
 # invariant(): boolean
 + getEvents(): List<Event>
 # //calculateDuration() : void//
@@ -16,13 +16,14 @@ class Project{
 
 class Task{
 - task_intervals : ArrayList<Interval>
-+ Task(id, name: String, father: Event, tags : List<String>)
+- active : boolean
++ Task(id: int, name: String, father: Event, tags : List<String>)
 # invariant(): boolean
 + getTaskIntervals() : ArrayList<interval>
-# //startTask() : void//
++ //startTask() : void//
 # //addEvent(event : Event) : void//
 # //calculateDuration() : void//
-# //stopTask() : void//
++ //stopTask() : void//
 + //acceptVisitor(visitor : Visitor) : void//
 + findActivityById(id : int) : Event
 + toJson(depth : int) : JSONObject
@@ -31,7 +32,7 @@ class Task{
 abstract Event{
 # {static} delay : int = 2{readOnly}
 # name : String
-- father : Event
+# father : Event
 # initTime : LocalDateTime
 # endTime : LocalDateTime
 # event_duration : Duration
@@ -39,7 +40,7 @@ abstract Event{
 # id : int
 # json : JSONObject
 # logger : Logger
-+ Event(identifier, n : String, f: Event, l : List<String>)
++ Event(identifier: int, n : String, f: Event, l : List<String>)
 + getName() : String
 + getTags() : List<String>
 + getInitTime() : LocalDateTime
@@ -54,7 +55,7 @@ abstract Event{
 # //addEvent(event : Event) : void//
 + //calculateDuration() : void//
 + //acceptVisitor(visitor : Visitor) : void//
-# invariant : boolean
+# invariant() : boolean
 # humanReadableFormat(duration: Duration) : String
 + //findActivityById(id : int) : Event//
 + //toJson(depth : int) : JSONObject//
@@ -74,11 +75,12 @@ class Clock{
 
 class Interval{
 - initTime : LocalDateTime
-- endTime : DateTime
+- endTime : LocalDateTime
 - duration : Duration /'cada golpe de reloj incremento'/
 - task : Task
 - logger : Logger
 - jsonInterval : JSONObject
+- active : boolean
 + Interval(t : Task)
 + getInitTime() : LocalDateTime
 + getEndTime() : LocalDateTime
@@ -87,6 +89,7 @@ class Interval{
 + getJsonInterval() : JSONObject
 # //endInterval() : void//
 + //acceptVisitor(visitor : Visitor) : void//
++ toJson(i : int) : JSONObject
 }
 
 interface Visitor{
@@ -101,42 +104,17 @@ class Print{
 - logger : Logger
 + Print(rootF: Event)
 + {static}getInstance(rootF: Event) : Print
-+ //printerInterval() : void//
++ //printInterval() : void//
 - DateFormatter(dt: LocalDateTime) : String
 + //visitTask(t : Task) : void//
 + //visitInterval(i : Interval) : void//
 + //visitProject(p : Project) : void//
 }
 
-package "java.utils"{
-interface Observer{
-+ update(arg0 : Observable, arg1 : Object)
-}
-
-abstract Observable{
-+ addObserver(ob : Observer)
-+ deleteObserver(ob : Observer)
-+ setChanged()
-+ notifyObservers(arg0 : Observable, arg1: Object}
-}
-}
 
 
 class Client{
-//main() : void//
-}
-
-
-class Search{
-- root : Event
-- {static} instance : Search
-- found : String
-- logger : Logger
-+ Search(rootF : Event, required : String)
-+ {static} getInstance(rootF : Event, required: String) : Search
-+ //visitProject(p : Project) : void//
-+ //visitTask(t : Task) : void//
-+ //visitInterval(i : Interval) : void//
+//main(args: String[]) : void//
 }
 
 class Json{
@@ -158,34 +136,35 @@ class JsonVisitor{
 + //visitTask(t : Task) : void//
 + //visitProject(p : Project) : void//
 }
-
-package "webserver"{
-class WebServer{
-- {static} PORT : int = 8080{readOnly}
-- currentEvent : Event
-- root : Event{readOnly}
-+ WebServer(root : Event)
-- findActivityByID(id : int) : Event
-
-
-
-
-- class SocketThread{
-- insocked : Socket{readOnly}
-+ //run() : void//
-- makeBodyAnswer(tokens : String[]) : String
-- makeHeaderAnswer : String
 }
 
-
-
-class MainWebServer{
-+ //{static} main(args : String[]) : void//
-+ //{static} webServer() : void//
-+ {static} makeTreeCourses() : Event
+package "secondmilestone" {
+class Search{
+- root : Event
+- {static} instance : Search
+- found : String
+- logger : Logger
++ Search(rootF : Event, required : String)
++ {static} getInstance(rootF : Event, required: String) : Search
++ //visitProject(p : Project) : void//
++ //visitTask(t : Task) : void//
++ //visitInterval(i : Interval) : void//
+}
 }
 
+package "java.utils"{
+interface Observer{
++ update(arg0 : Observable, arg1 : Object)
 }
+
+abstract Observable{
++ addObserver(ob : Observer)
++ deleteObserver(ob : Observer)
++ setChanged()
++ notifyObservers(arg0 : Observable, arg1: Object}
+}
+}
+
 
 Event <|-- Task
 Event <|-- Project
@@ -199,6 +178,6 @@ Visitor <-- Client
 Print --|> Visitor
 Search --|> Visitor
 JsonVisitor --|> Visitor
-WebServer --> MainWebServer
+
 
 @enduml
