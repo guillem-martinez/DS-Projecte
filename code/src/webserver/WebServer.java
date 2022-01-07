@@ -2,14 +2,14 @@ package webserver;
 
 
 import firstmilestone.Event;
+import firstmilestone.Project;
 import firstmilestone.Task;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class WebServer {
@@ -17,6 +17,7 @@ public class WebServer {
 
   private Event currentEvent;
   private final Event root;
+  private int placeholderId = 20;
 
   public WebServer(Event root) {
     this.root = root;
@@ -107,7 +108,7 @@ public class WebServer {
     }
 
 
-    private String makeBodyAnswer(String[] tokens) {
+    private String makeBodyAnswer(String[] tokens) throws UnsupportedEncodingException {
       String body = "";
       switch (tokens[0]) {
         case "get_tree": {
@@ -135,7 +136,28 @@ public class WebServer {
           body = "{}";
           break;
         }
-        // TODO: add new task, project
+        case "addEvent": {
+          System.out.println("ADD EVENT ");
+          int id = Integer.parseInt(tokens[1]);
+          Project father = (Project) findActivityById(id);
+          Boolean isProject = Boolean.parseBoolean(tokens[2]);
+          String name = tokens[3];
+          String tagsObtained = tokens[4];
+          List<String> tags = Arrays.asList(tagsObtained.split("\\s*,\\s*"));
+
+          if(isProject == true) {
+            Project project = new Project(placeholderId+1, name, father, tags);
+            System.out.println("PROYECTO CREADO");
+            //father.addEvent(project);
+          }
+          else {
+            Task task = new Task(placeholderId+1, name, father, tags);
+            System.out.println("TASCA CREADA");
+            //father.addEvent(task);
+          }
+          placeholderId++;
+          break;
+        }
         // TODO: edit task, project properties
         default:
           assert false;

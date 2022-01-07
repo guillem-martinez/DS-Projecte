@@ -2,6 +2,7 @@ package firstmilestone;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,10 +22,12 @@ public class Interval implements Observer {
   private Task task;
   private Logger logger = LoggerFactory.getLogger(Interval.class);
   private JSONObject jsonInterval;
+  private boolean active;
 
   public Interval(Task t) {
     task = t;
     jsonInterval = new JSONObject();
+    active = true;
 
     if (task.getInitTime() == null) {
       task.setInitTime(task.initTime);
@@ -77,6 +80,7 @@ public class Interval implements Observer {
   protected void endInterval() {
     endTime = LocalDateTime.now();
     duration = Duration.between(initTime, endTime);
+    active = false;
     Clock.getInstance().deleteObserver(this);
 
     logger.debug("End Time of the interval set to NOW and removes him as an observer");
@@ -89,9 +93,10 @@ public class Interval implements Observer {
   public JSONObject toJson(int i){
     JSONObject j = new JSONObject();
 
-    j.put("initTime", initTime);
-    j.put("endTime", endTime);
+    j.put("initTime", initTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+    j.put("endTime", endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     j.put("duration", duration.getSeconds());
+    j.put("active", active);
     j.put("class", this.getClass().getName().substring(15));
 
     return j;

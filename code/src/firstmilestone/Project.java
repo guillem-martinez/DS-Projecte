@@ -72,7 +72,7 @@ public class Project extends Event {
     assert eventDuration.getSeconds() > 0 : "The durations calculated must be greater than 0";
   }
 
-  protected void addEvent(Event e) {
+  public void addEvent(Event e) {
 
     //Precondition
 
@@ -119,7 +119,7 @@ public class Project extends Event {
       int i = 0;
       while (!b && i < events.size()){
         e = events.get(i).findActivityById(id);
-        if(e.getId() == id && e != null){
+        if(e != null && e.getId() == id){
           b = true;
         }
         i++;

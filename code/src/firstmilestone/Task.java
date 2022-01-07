@@ -119,7 +119,7 @@ public class Task extends Event {
     last.endInterval();
 
     this.setEndTime(last.getEndTime());
-    this.setDuration(last.getDuration());
+    this.calculateDuration();
     this.active = false;
 
     logger.debug("Task stopped");
