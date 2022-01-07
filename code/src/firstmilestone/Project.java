@@ -1,11 +1,11 @@
 package firstmilestone;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 
 
@@ -111,15 +111,15 @@ public class Project extends Event {
 
   @Override
   public Event findActivityById(int id) {
-    if (this.id == id){
+    if (this.id == id) {
       return this;
-      } else{
+    } else {
       boolean b = false;
       Event e = null;
       int i = 0;
-      while (!b && i < events.size()){
+      while (!b && i < events.size()) {
         e = events.get(i).findActivityById(id);
-        if(e != null && e.getId() == id){
+        if (e != null && e.getId() == id) {
           b = true;
         }
         i++;
@@ -144,14 +144,14 @@ public class Project extends Event {
     json.put("duration", this.getDuration().toSeconds());
     json.put("class", this.getClass().getName().substring(15));
 
-    if(this.getFather() !=null) {
+    if (this.getFather() != null) {
       json.put("parent", this.father.getName());
       json.put("tags", this.tags);
     }
 
-    if(depth > 0) {
-      for(int i = 0; i < this.events.size(); i++) {
-        JSONObject child = this.events.get(i).toJson(depth-1);
+    if (depth > 0) {
+      for (int i = 0; i < this.events.size(); i++) {
+        JSONObject child = this.events.get(i).toJson(depth - 1);
         childs.put(child);
       }
       json.put("children", childs);

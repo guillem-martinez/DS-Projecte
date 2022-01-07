@@ -1,11 +1,11 @@
 package firstmilestone;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 //Leaf element of Composite pattern that extends functionality of Fita1.Event
@@ -159,20 +159,20 @@ public class Task extends Event {
         this.humanReadableFormat(this.getDuration()).length() - 1));
 
      */
-    json.put("duration",this.getDuration().toSeconds());
+    json.put("duration", this.getDuration().toSeconds());
     json.put("class", this.getClass().getName().substring(15));
     json.put("parent", this.father.getName());
     json.put("tags", this.tags);
     json.put("active", this.active);
     JSONArray intervals = new JSONArray();
 
-    if(depth > 0) {
-      for(int i = 0; i < this.getTaskIntervals().size(); i++) {
+    if (depth > 0) {
+      for (int i = 0; i < this.getTaskIntervals().size(); i++) {
         JSONObject child = this.getTaskIntervals().get(i).toJson(depth - 1);
         intervals.put(child);
       }
-      }
-      json.put("intervals", intervals);
+    }
+    json.put("intervals", intervals);
 
 
     return json;

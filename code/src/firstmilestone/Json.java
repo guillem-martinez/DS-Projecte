@@ -3,7 +3,8 @@ package firstmilestone;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import org.json.*;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 
 public class Json {

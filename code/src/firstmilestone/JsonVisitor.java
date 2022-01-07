@@ -1,26 +1,30 @@
 package firstmilestone;
 
-import org.json.*;
-
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+
 
 public class JsonVisitor implements Visitor {
 
   private JSONObject father;
-  private JSONArray childs, intervals;
+  private JSONArray childs;
+  private JSONArray intervals;
 
 
-  public JsonVisitor(){
+  public JsonVisitor() {
     this.father = new JSONObject();
     this.childs = new JSONArray();
     this.intervals = new JSONArray();
   }
 
-  public JSONObject getFather(){
+  public JSONObject getFather() {
     return this.father;
   }
 
-  public JSONArray getChildren(){
+  public JSONArray getChildren() {
     return this.childs;
   }
 
@@ -56,20 +60,17 @@ public class JsonVisitor implements Visitor {
     }
     */
     JSONArray intervals = new JSONArray();
-    ArrayList<Integer> iWithParent = new ArrayList<>();
-    //if (!this.intervals.isEmpty()) {
-      for (int i = 0; i < this.intervals.length(); i++) {
-        JSONObject IntervalsJSONObject = (JSONObject) this.intervals.get(i);
-        if(IntervalsJSONObject.getString("parent").equals(t.getName()))
-        {
-          iWithParent.add(i);
-          intervals.put(IntervalsJSONObject);
+    ArrayList<Integer> iwithparent = new ArrayList<>();
+    for (int i = 0; i < this.intervals.length(); i++) {
+      JSONObject intervalsjsonobject = (JSONObject) this.intervals.get(i);
+      if (intervalsjsonobject.getString("parent").equals(t.getName())) {
+        iwithparent.add(i);
+        intervals.put(intervalsjsonobject);
 
-        }
       }
-    //}
+    }
 
-    for(Integer it : iWithParent){
+    for (Integer it : iwithparent) {
       this.intervals.remove(it);
     }
     t.getJson().put("intervals", intervals);
@@ -81,14 +82,14 @@ public class JsonVisitor implements Visitor {
 
   @Override
   public void visitProject(Project p) {
-    p.getJson().put("class",p.getClass().getName().substring(15));
+    p.getJson().put("class", p.getClass().getName().substring(15));
     p.getJson().put("name", p.getName());
     p.getJson().put("id", p.getId());
     p.getJson().put("initTime", p.getInitTime());
     p.getJson().put("endTime", p.getEndTime());
     p.getJson().put("duration", p.humanReadableFormat(p.getDuration()).substring(0,
         p.humanReadableFormat(p.getDuration()).length() - 1));
-    if(p.getFather() !=null){
+    if (p.getFather() != null) {
       p.getJson().put("parent", p.getFather().getName());
       p.getJson().put("tags", p.getTags());
     }
@@ -101,29 +102,26 @@ public class JsonVisitor implements Visitor {
       }
     }
     */
-    ArrayList<Integer> iWithParent = new ArrayList<>();
-    //if (!this.childs.isEmpty()) {
-      for (int i = 0; i < this.childs.length(); i++) {
-        JSONObject ChildJSONObject = (JSONObject) this.childs.get(i);
-        if(ChildJSONObject.getString("parent").equals(p.getName()))
-        {
-          iWithParent.add(i);
-          children.put(ChildJSONObject);
+    ArrayList<Integer> iwithparent = new ArrayList<>();
+    for (int i = 0; i < this.childs.length(); i++) {
+      JSONObject childjsonobject = (JSONObject) this.childs.get(i);
+      if (childjsonobject.getString("parent").equals(p.getName())) {
+        iwithparent.add(i);
+        children.put(childjsonobject);
 
-        }
       }
-    //}
+    }
 
     p.getJson().put("children", children);
-    for(Integer it : iWithParent){
+    for (Integer it : iwithparent) {
       this.childs.remove(it);
     }
 
 
 
-    if(p.getFather() == null){
+    if (p.getFather() == null) {
       this.father = p.getJson();
-    }else{
+    } else {
       this.childs.put(p.getJson());
 
     }

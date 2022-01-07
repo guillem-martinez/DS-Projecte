@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,9 +62,13 @@ public abstract class  Event {
     return eventDuration;
   }
 
-  public JSONObject getJson() { return json; }
+  public JSONObject getJson() {
+    return json;
+  }
 
-  public int getId(){ return id; }
+  public int getId() {
+    return id;
+  }
   //Setters
 
   //Setting the initTime of this event to LocalDateTime given by parameter.

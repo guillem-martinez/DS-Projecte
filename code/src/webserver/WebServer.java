@@ -4,8 +4,11 @@ package webserver;
 import firstmilestone.Event;
 import firstmilestone.Project;
 import firstmilestone.Task;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
@@ -145,12 +148,11 @@ public class WebServer {
           String tagsObtained = tokens[4];
           List<String> tags = Arrays.asList(tagsObtained.split("\\s*,\\s*"));
 
-          if(isProject == true) {
-            Project project = new Project(placeholderId+1, name, father, tags);
+          if (isProject == true) {
+            Project project = new Project(placeholderId + 1, name, father, tags);
             //father.addEvent(project);
-          }
-          else {
-            Task task = new Task(placeholderId+1, name, father, tags);
+          } else {
+            Task task = new Task(placeholderId + 1, name, father, tags);
             //System.out.println("TASCA CREADA");
             //father.addEvent(task);
           }

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
-
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +72,9 @@ public class Interval implements Observer {
     return task;
   }
 
-  public JSONObject getJsonInterval() { return jsonInterval; }
+  public JSONObject getJsonInterval() {
+    return jsonInterval;
+  }
 
 
   //If his Father task stops, the interval also stop.
@@ -90,7 +91,7 @@ public class Interval implements Observer {
     visitor.visitInterval(this);
   }
 
-  public JSONObject toJson(int i){
+  public JSONObject toJson(int i) {
     JSONObject j = new JSONObject();
 
     j.put("initTime", initTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
