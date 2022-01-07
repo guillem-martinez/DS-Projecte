@@ -1,0 +1,9 @@
+INFORME MILESTONE 3 TIME_TRACKER
+
+En esta tercera entrega del proyecto ha sido como en las 2 anteriores entregas, desarrollada de forma conjunta entre todos los integrantes del grupo.
+A pesar de lo dicho anteriormente y en anteriores entregas, cada miembro del grupo se ha centrado en profundizar en ciertos aspectos.
+La primera parte del codelab se centraron en adaptarla y desarrollarla Guillem y Pau.
+Cristian y Biel se centraron en acabar la conversión del árbol a Json y la adaptación de las funciones necesarias para utilizarlo en el codelab.
+De forma conjunta, los 4 nos encargamos de adaptar la última parte del codelab, la correción de los 3 primeros pasos de la guía, y todo lo relacionado con el checkstyle, logbacks...
+
+Por concluir nos gustaría aclarar que a pesar de habernos focalizado cada integrante del grupo en una parte, todos nos hemos involucrado en todas las partes desarrolladas en el proyecto.

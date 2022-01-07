@@ -2,8 +2,12 @@ package webserver;
 
 
 import firstmilestone.Event;
+import firstmilestone.Print;
 import firstmilestone.Project;
 import firstmilestone.Task;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +25,7 @@ public class WebServer {
   private Event currentEvent;
   private final Event root;
   private int placeholderId = 20;
+  private Logger logger = LoggerFactory.getLogger(WebServer.class);
 
   public WebServer(Event root) {
     this.root = root;
@@ -41,6 +46,7 @@ public class WebServer {
   }
 
   private Event findActivityById(int id) {
+    logger.debug("FINDING ACTIVITY WITH ID: "+id);
     return root.findActivityById(id);
   }
 
@@ -115,13 +121,16 @@ public class WebServer {
       String body = "";
       switch (tokens[0]) {
         case "get_tree": {
+          logger.debug("GETTING TREE...");
           int id = Integer.parseInt(tokens[1]);
           Event event = findActivityById(id);
           assert (event != null);
+          logger.debug("EVENTS CONVERTING TO JSON");
           body = event.toJson(1).toString();
           break;
         }
         case "start": {
+          logger.debug("STARTING TASK...");
           int id = Integer.parseInt(tokens[1]);
           Event event = findActivityById(id);
           assert (event != null);
@@ -131,6 +140,7 @@ public class WebServer {
           break;
         }
         case "stop": {
+          logger.debug("STOPPING TASK...");
           int id = Integer.parseInt(tokens[1]);
           Event event = findActivityById(id);
           assert (event != null);
@@ -140,7 +150,7 @@ public class WebServer {
           break;
         }
         case "addEvent": {
-          //System.out.println("ADD EVENT ");
+          logger.debug("ADDING EVENT...");
           int id = Integer.parseInt(tokens[1]);
           Project father = (Project) findActivityById(id);
           Boolean isProject = Boolean.parseBoolean(tokens[2]);
@@ -148,12 +158,13 @@ public class WebServer {
           String tagsObtained = tokens[4];
           List<String> tags = Arrays.asList(tagsObtained.split("\\s*,\\s*"));
 
+          logger.debug("CREATING NEITHER A PROJECT OR A TASK");
           if (isProject == true) {
             Project project = new Project(placeholderId + 1, name, father, tags);
-            //father.addEvent(project);
+            logger.debug("PROJECT CREATED");
           } else {
             Task task = new Task(placeholderId + 1, name, father, tags);
-            //System.out.println("TASCA CREADA");
+            logger.debug("TASK CREATED");
             //father.addEvent(task);
           }
           placeholderId++;
